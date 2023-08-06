@@ -14,21 +14,36 @@ namespace WordGame
 {
 	public partial class Form1 : Form
 	{
+		Tuple<string, string> startWords;
 		public Form1()
 		{
 			InitializeComponent();
-			var startWords = Tools.getStartWords("words-start.txt");
+			this.KeyPreview = true;
+			this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+			startWords = Tools.getStartWords("words-start.txt");
 			Tools.setButtons(this, startWords.Item1, startWords.Item2);
 			foreach (Button button in this.Controls.OfType<Button>())
 			{
 				button.Click += buttonClick;
 			}
+			
 		}
 		private void buttonClick(object sender, EventArgs e)
 		{
 			Button button = (Button)sender;
 			string letter = button.Text;
 			Tools.addLetter(TextInput, letter);
+		}
+		private void Form1_KeyDown(object sender, KeyEventArgs e)
+		{
+			string text = e.KeyCode.ToString();
+			Console.WriteLine(text);
+			string letters = startWords.Item1 + startWords.Item2;
+			Console.WriteLine(letters);
+			if (letters.Contains(text.ToLower()) && text.Length == 1)
+			{
+				TextInput.Text += text;
+			}
 		}
 	}
 	public class Tools
@@ -43,7 +58,7 @@ namespace WordGame
 			int index = random.Next(0, values.Count);
 			return values[index];
 		}
-		public static (string, string) getStartWords (string file)
+		public static Tuple<string, string> getStartWords (string file)
 		{
 			List<string> startWords1 = File.ReadAllLines(file).ToList();
 			string word1 = Tools.getRandomString(startWords1);
@@ -66,7 +81,7 @@ namespace WordGame
 				}
 			}
 			string word2 = Tools.getRandomString(startWords2);
-			return (word1, word2);
+			return Tuple.Create(word1, word2);
 		}
 		public static void setButtons (Form form, string word1, string word2)
 		{
@@ -89,17 +104,26 @@ namespace WordGame
 		}
 		public static void addLetter (TextBox textbox, string letter)
 		{
+			if (textbox.Text.Length == 19)
+			{
+				return;
+			}
 			textbox.Text += letter;
 			float height = textbox.Height * 0.99f;
 			float width = textbox.Width * 0.99f;
-			//textbox.SuspendLayout();
-			//Font font = textbox.Font;
-			//Size size = TextRenderer.MeasureText(textbox.Text, font);
-			//float heightRatio = height / size.Height;
-			//float widthRatio = width / size.Width;
-			//font = new Font(font.FontFamily, font.Size * Math.Min(widthRatio, heightRatio), font.Style);
-			//textbox.Font = font;
-			//textbox.ResumeLayout();
+			textbox.SuspendLayout();
+			Font font = textbox.Font;
+			Size size = TextRenderer.MeasureText(textbox.Text, font);
+			float heightRatio = height / size.Height;
+			float widthRatio = width / size.Width;
+			if (font.Size * Math.Min(widthRatio, heightRatio) > font.Size)
+			{
+				textbox.ResumeLayout();
+				return;
+			}
+			font = new Font(font.FontFamily, font.Size * Math.Min(widthRatio, heightRatio), font.Style);
+			textbox.Font = font;
+			textbox.ResumeLayout();
 		}
 	}
 }

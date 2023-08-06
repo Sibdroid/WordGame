@@ -114,12 +114,11 @@
 			// TextInput
 			// 
 			this.TextInput.BackColor = System.Drawing.SystemColors.Control;
-			this.TextInput.Font = new System.Drawing.Font("Roboto", 16F);
-			this.TextInput.Location = new System.Drawing.Point(1, 43);
+			this.TextInput.Font = new System.Drawing.Font("Roboto", 30F);
+			this.TextInput.Location = new System.Drawing.Point(1, 2);
 			this.TextInput.Name = "TextInput";
-			this.TextInput.Size = new System.Drawing.Size(235, 33);
+			this.TextInput.Size = new System.Drawing.Size(235, 56);
 			this.TextInput.TabIndex = 8;
-			this.TextInput.Text = "A";
 			this.TextInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
 			// Form1
