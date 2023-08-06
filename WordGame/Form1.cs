@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Reflection.Emit;
 
 namespace WordGame
 {
@@ -37,18 +38,26 @@ namespace WordGame
 		private void Form1_KeyDown(object sender, KeyEventArgs e)
 		{
 			string text = e.KeyCode.ToString();
-			Console.WriteLine(text);
 			string letters = startWords.Item1 + startWords.Item2;
-			Console.WriteLine(letters);
 			if (letters.Contains(text.ToLower()) && text.Length == 1)
 			{
-				TextInput.Text += text;
+				Tools.addLetter(TextInput, text);
+			}
+			else
+			{
+				switch (text)
+				{
+					case "Back":
+						Tools.erase(TextInput);
+						break;
+				}
 			}
 		}
 	}
 	public class Tools
 	{
 		static Random random = new Random();
+		static string defaultText = "Enter...";
 		public static System.Drawing.Color getColor (string code)
 		{
 			return System.Drawing.ColorTranslator.FromHtml (code);
@@ -108,7 +117,27 @@ namespace WordGame
 			{
 				return;
 			}
+			if (textbox.Text == defaultText) 
+			{
+				textbox.Text = "";
+			}
 			textbox.Text += letter;
+
+		}
+		public static void erase (TextBox textbox)
+		{
+			if (textbox.Text == defaultText)
+			{
+				return;
+			}
+			textbox.Text = textbox.Text.Remove(textbox.Text.Length - 1);
+			if (textbox.Text.Length == 0)
+			{
+				textbox.Text = defaultText;
+			}
+		}
+		public static void resizeText (TextBox textbox)
+		{
 			float height = textbox.Height * 0.99f;
 			float width = textbox.Width * 0.99f;
 			textbox.SuspendLayout();

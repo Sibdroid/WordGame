@@ -119,6 +119,7 @@
 			this.TextInput.Name = "TextInput";
 			this.TextInput.Size = new System.Drawing.Size(235, 56);
 			this.TextInput.TabIndex = 8;
+			this.TextInput.Text = "Enter...";
 			this.TextInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
 			// Form1
