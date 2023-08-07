@@ -122,6 +122,7 @@ namespace WordGame
 				textbox.Text = "";
 			}
 			textbox.Text += letter;
+			resizeText(textbox, TextRenderer.MeasureText(textbox.Text, textbox.Font));
 
 		}
 		public static void erase (TextBox textbox)
@@ -135,24 +136,47 @@ namespace WordGame
 			{
 				textbox.Text = defaultText;
 			}
+			resizeText(textbox, TextRenderer.MeasureText(textbox.Text, textbox.Font), false);
 		}
-		public static void resizeText (TextBox textbox)
+		public static void resizeText (TextBox textbox, Size standard_size, bool decrease=true)
 		{
-			float height = textbox.Height * 0.99f;
-			float width = textbox.Width * 0.99f;
-			textbox.SuspendLayout();
-			Font font = textbox.Font;
-			Size size = TextRenderer.MeasureText(textbox.Text, font);
-			float heightRatio = height / size.Height;
-			float widthRatio = width / size.Width;
-			if (font.Size * Math.Min(widthRatio, heightRatio) > font.Size)
+			SizeF textSize = default(SizeF);
+			if (decrease)
 			{
-				textbox.ResumeLayout();
-				return;
+				do
+				{
+					using (Font font = new Font(textbox.Font.Name, textbox.Font.SizeInPoints))
+					{
+						textSize = TextRenderer.MeasureText(textbox.Text, font);
+						if (textSize.Width > textbox.Width)
+						{
+							textbox.Font = new Font(font.Name, font.SizeInPoints - 1f);
+						}
+					}
+				} while (textSize.Width > textbox.Width);
 			}
-			font = new Font(font.FontFamily, font.Size * Math.Min(widthRatio, heightRatio), font.Style);
-			textbox.Font = font;
-			textbox.ResumeLayout();
+			else
+			{
+				do
+				{
+					using (Font font = new Font(textbox.Font.Name, textbox.Font.SizeInPoints))
+					{
+						textSize = TextRenderer.MeasureText(textbox.Text, font);
+						if (textSize.Width < textbox.Width)
+						{
+							Font newFont = new Font(font.Name, font.SizeInPoints + 1f);
+							if (newFont.Size <= 30)
+							{
+								textbox.Font = newFont;
+							}
+							else
+							{
+								return;
+							}
+						}
+					}
+				} while (textSize.Width < textbox.Width);
+			}
 		}
 	}
 }
