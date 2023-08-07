@@ -25,7 +25,11 @@ namespace WordGame
 			Tools.setButtons(this, startWords.Item1, startWords.Item2);
 			foreach (Button button in this.Controls.OfType<Button>())
 			{
-				button.Click += buttonClick;
+				if (!button.Name.Contains("Button"))
+				{
+					button.Click += buttonClick;
+				}
+				
 			}
 			
 		}
@@ -53,11 +57,18 @@ namespace WordGame
 				}
 			}
 		}
+
+		private void EraseButton_Click(object sender, EventArgs e)
+		{
+			Tools.erase(TextInput);
+		}
 	}
 	public class Tools
 	{
 		static Random random = new Random();
 		static string defaultText = "Enter...";
+		static int maxLength = 16;
+		static readonly int defaultTextSize = 30;
 		public static System.Drawing.Color getColor (string code)
 		{
 			return System.Drawing.ColorTranslator.FromHtml (code);
@@ -113,15 +124,17 @@ namespace WordGame
 		}
 		public static void addLetter (TextBox textbox, string letter)
 		{
-			if (textbox.Text.Length == 19)
+			if (textbox.Text.Length == maxLength)
 			{
 				return;
 			}
 			if (textbox.Text == defaultText) 
 			{
 				textbox.Text = "";
+				textbox.ForeColor = Tools.getColor("#AAAAAA");
 			}
 			textbox.Text += letter;
+			textbox.ForeColor = Color.Black;
 			resizeText(textbox, TextRenderer.MeasureText(textbox.Text, textbox.Font));
 
 		}
@@ -135,6 +148,7 @@ namespace WordGame
 			if (textbox.Text.Length == 0)
 			{
 				textbox.Text = defaultText;
+				textbox.ForeColor = Tools.getColor("#AAAAAA");
 			}
 			resizeText(textbox, TextRenderer.MeasureText(textbox.Text, textbox.Font), false);
 		}
@@ -165,7 +179,7 @@ namespace WordGame
 						if (textSize.Width < textbox.Width)
 						{
 							Font newFont = new Font(font.Name, font.SizeInPoints + 1f);
-							if (newFont.Size <= 30)
+							if (newFont.Size <= defaultTextSize)
 							{
 								textbox.Font = newFont;
 							}

@@ -37,12 +37,14 @@
 			this.Word11 = new System.Windows.Forms.Button();
 			this.Word10 = new System.Windows.Forms.Button();
 			this.TextInput = new System.Windows.Forms.TextBox();
+			this.EraseButton = new System.Windows.Forms.Button();
+			this.ConfirmButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// Word00
 			// 
 			this.Word00.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word00.Location = new System.Drawing.Point(1, 121);
+			this.Word00.Location = new System.Drawing.Point(1, 133);
 			this.Word00.Name = "Word00";
 			this.Word00.Size = new System.Drawing.Size(55, 55);
 			this.Word00.TabIndex = 0;
@@ -51,7 +53,7 @@
 			// Word01
 			// 
 			this.Word01.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word01.Location = new System.Drawing.Point(61, 121);
+			this.Word01.Location = new System.Drawing.Point(61, 133);
 			this.Word01.Name = "Word01";
 			this.Word01.Size = new System.Drawing.Size(55, 55);
 			this.Word01.TabIndex = 1;
@@ -60,7 +62,7 @@
 			// Word02
 			// 
 			this.Word02.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word02.Location = new System.Drawing.Point(121, 121);
+			this.Word02.Location = new System.Drawing.Point(121, 133);
 			this.Word02.Name = "Word02";
 			this.Word02.Size = new System.Drawing.Size(55, 55);
 			this.Word02.TabIndex = 2;
@@ -69,7 +71,7 @@
 			// Word03
 			// 
 			this.Word03.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word03.Location = new System.Drawing.Point(181, 121);
+			this.Word03.Location = new System.Drawing.Point(181, 133);
 			this.Word03.Name = "Word03";
 			this.Word03.Size = new System.Drawing.Size(55, 55);
 			this.Word03.TabIndex = 3;
@@ -78,7 +80,7 @@
 			// Word13
 			// 
 			this.Word13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word13.Location = new System.Drawing.Point(181, 181);
+			this.Word13.Location = new System.Drawing.Point(181, 193);
 			this.Word13.Name = "Word13";
 			this.Word13.Size = new System.Drawing.Size(55, 55);
 			this.Word13.TabIndex = 7;
@@ -87,7 +89,7 @@
 			// Word12
 			// 
 			this.Word12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word12.Location = new System.Drawing.Point(121, 181);
+			this.Word12.Location = new System.Drawing.Point(121, 193);
 			this.Word12.Name = "Word12";
 			this.Word12.Size = new System.Drawing.Size(55, 55);
 			this.Word12.TabIndex = 6;
@@ -96,7 +98,7 @@
 			// Word11
 			// 
 			this.Word11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word11.Location = new System.Drawing.Point(61, 181);
+			this.Word11.Location = new System.Drawing.Point(61, 193);
 			this.Word11.Name = "Word11";
 			this.Word11.Size = new System.Drawing.Size(55, 55);
 			this.Word11.TabIndex = 5;
@@ -105,7 +107,7 @@
 			// Word10
 			// 
 			this.Word10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word10.Location = new System.Drawing.Point(1, 181);
+			this.Word10.Location = new System.Drawing.Point(1, 193);
 			this.Word10.Name = "Word10";
 			this.Word10.Size = new System.Drawing.Size(55, 55);
 			this.Word10.TabIndex = 4;
@@ -114,19 +116,48 @@
 			// TextInput
 			// 
 			this.TextInput.BackColor = System.Drawing.SystemColors.Control;
+			this.TextInput.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.TextInput.Font = new System.Drawing.Font("Roboto", 30F);
-			this.TextInput.Location = new System.Drawing.Point(1, 2);
+			this.TextInput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.TextInput.Location = new System.Drawing.Point(1, 3);
 			this.TextInput.Name = "TextInput";
-			this.TextInput.Size = new System.Drawing.Size(235, 56);
+			this.TextInput.Size = new System.Drawing.Size(235, 49);
 			this.TextInput.TabIndex = 8;
 			this.TextInput.Text = "Enter...";
 			this.TextInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// EraseButton
+			// 
+			this.EraseButton.BackColor = System.Drawing.SystemColors.Control;
+			this.EraseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.EraseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
+			this.EraseButton.Location = new System.Drawing.Point(31, 65);
+			this.EraseButton.Name = "EraseButton";
+			this.EraseButton.Size = new System.Drawing.Size(55, 55);
+			this.EraseButton.TabIndex = 9;
+			this.EraseButton.Text = "⌫";
+			this.EraseButton.UseVisualStyleBackColor = false;
+			this.EraseButton.Click += new System.EventHandler(this.EraseButton_Click);
+			// 
+			// ConfirmButton
+			// 
+			this.ConfirmButton.BackColor = System.Drawing.SystemColors.Control;
+			this.ConfirmButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ConfirmButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
+			this.ConfirmButton.Location = new System.Drawing.Point(151, 65);
+			this.ConfirmButton.Name = "ConfirmButton";
+			this.ConfirmButton.Size = new System.Drawing.Size(55, 55);
+			this.ConfirmButton.TabIndex = 10;
+			this.ConfirmButton.Text = "✓";
+			this.ConfirmButton.UseVisualStyleBackColor = false;
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(238, 481);
+			this.Controls.Add(this.ConfirmButton);
+			this.Controls.Add(this.EraseButton);
 			this.Controls.Add(this.TextInput);
 			this.Controls.Add(this.Word13);
 			this.Controls.Add(this.Word12);
@@ -154,6 +185,8 @@
 		private System.Windows.Forms.Button Word11;
 		private System.Windows.Forms.Button Word10;
 		private System.Windows.Forms.TextBox TextInput;
+		private System.Windows.Forms.Button EraseButton;
+		private System.Windows.Forms.Button ConfirmButton;
 	}
 }
 
