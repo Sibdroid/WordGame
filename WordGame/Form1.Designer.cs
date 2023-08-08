@@ -129,6 +129,9 @@
 			// EraseButton
 			// 
 			this.EraseButton.BackColor = System.Drawing.SystemColors.Control;
+			this.EraseButton.FlatAppearance.BorderSize = 0;
+			this.EraseButton.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+			this.EraseButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
 			this.EraseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.EraseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
 			this.EraseButton.Location = new System.Drawing.Point(31, 65);
@@ -142,6 +145,9 @@
 			// ConfirmButton
 			// 
 			this.ConfirmButton.BackColor = System.Drawing.SystemColors.Control;
+			this.ConfirmButton.FlatAppearance.BorderSize = 0;
+			this.ConfirmButton.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+			this.ConfirmButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
 			this.ConfirmButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.ConfirmButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
 			this.ConfirmButton.Location = new System.Drawing.Point(151, 65);

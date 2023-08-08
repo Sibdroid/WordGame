@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Reflection.Emit;
+using System.Drawing.Drawing2D;
 
 namespace WordGame
 {
@@ -29,7 +30,10 @@ namespace WordGame
 				{
 					button.Click += buttonClick;
 				}
-				
+				EraseButton.MouseEnter += EraseButton_MouseEnter;
+				EraseButton.MouseLeave += EraseButton_MouseLeave;
+				ConfirmButton.MouseEnter += ConfirmButton_MouseEnter;
+				ConfirmButton.MouseLeave += ConfirmButton_MouseLeave;
 			}
 			
 		}
@@ -61,6 +65,26 @@ namespace WordGame
 		private void EraseButton_Click(object sender, EventArgs e)
 		{
 			Tools.erase(TextInput);
+		}
+		private void EraseButton_MouseEnter(object sender, EventArgs e)
+		{
+			EraseButton.FlatAppearance.BorderColor = Color.Black;
+			EraseButton.FlatAppearance.BorderSize = 1;
+		}
+		private void EraseButton_MouseLeave(object sender, EventArgs e)
+		{
+			EraseButton.FlatAppearance.BorderColor = SystemColors.Control;
+			EraseButton.FlatAppearance.BorderSize = 0;
+		}
+		private void ConfirmButton_MouseEnter(object sender, EventArgs e)
+		{
+			ConfirmButton.FlatAppearance.BorderColor = Color.Black;
+			ConfirmButton.FlatAppearance.BorderSize = 1;
+		}
+		private void ConfirmButton_MouseLeave(object sender, EventArgs e)
+		{
+			ConfirmButton.FlatAppearance.BorderColor = SystemColors.Control;
+			ConfirmButton.FlatAppearance.BorderSize = 0;
 		}
 	}
 	public class Tools
@@ -110,6 +134,10 @@ namespace WordGame
 				button.ForeColor = Tools.getColor("#000000");
 				button.FlatStyle = FlatStyle.Flat;
 				button.FlatAppearance.BorderSize = 1;
+				if (button.Name.Contains("Button"))
+				{
+					button.FlatAppearance.BorderSize = 0;
+				}
 				if (button.Name.Contains("Word0"))
 				{
 					button.Text = word1[button.Name[button.Name.Length - 1] - '0'].ToString().ToUpper();
