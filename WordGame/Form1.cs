@@ -48,18 +48,21 @@ namespace WordGame
 			if (word.Length < 4)
 			{
 				Messages.Text = "TOO SHORT";
+				Messages.ForeColor = Tools.getColor("#E2C044");
 				Tools.wipe(TextInput);
 				return;
 			}
 			if (foundWords.Contains(word))
 			{
 				Messages.Text = "ALREADY FOUND";
+				Messages.ForeColor = Tools.getColor("#E2C044");
 				Tools.wipe(TextInput);
 				return;
 			}
 			if (!allWords.Contains(word))
 			{
 				Messages.Text = "NO SUCH WORD";
+				Messages.ForeColor = Tools.getColor("#E2C044");
 				Tools.wipe(TextInput);
 				return;
 			}
@@ -68,18 +71,23 @@ namespace WordGame
 			if (!anyWord1)
 			{
 				Messages.Text = "ADD A PINK ONE";
+				Messages.ForeColor = Tools.getColor("#E2C044");
 				Tools.wipe(TextInput);
 				return;
 			}
 			if (!anyWord2)
 			{
 				Messages.Text = "ADD A BLUE ONE";
+				Messages.ForeColor = Tools.getColor("#E2C044");
 				Tools.wipe(TextInput);
 				return;
 			}
 			foundWords.Add(word);
+			Console.WriteLine(word);
+			Console.WriteLine(Tools.calculateValue(word));
 			Tools.wipe(TextInput);
 			Messages.Text = $"{word.ToUpper()}";
+			Messages.ForeColor = Tools.getColor("#21A179");
 
 			
 
@@ -272,6 +280,28 @@ namespace WordGame
 					}
 				} while (textSize.Width < textbox.Width);
 			}
+		}
+		public static int calculateValue(string word)
+		{
+			int value = word.Length;
+			if (4 < word.Length && word.Length < 7)
+			{
+				value++;
+			}
+			if (7 < word.Length && word.Length < 10)
+			{
+				value++;
+			}
+			if (10 < word.Length)
+			{
+				value++;
+			}
+			if (word.Distinct().Count() == 8)
+			{
+				value *= 2;
+			}
+			return value;
+
 		}
 	}
 }
