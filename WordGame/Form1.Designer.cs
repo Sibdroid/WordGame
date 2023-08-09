@@ -39,12 +39,13 @@
 			this.TextInput = new System.Windows.Forms.TextBox();
 			this.EraseButton = new System.Windows.Forms.Button();
 			this.ConfirmButton = new System.Windows.Forms.Button();
+			this.Messages = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// Word00
 			// 
 			this.Word00.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word00.Location = new System.Drawing.Point(1, 133);
+			this.Word00.Location = new System.Drawing.Point(1, 157);
 			this.Word00.Name = "Word00";
 			this.Word00.Size = new System.Drawing.Size(55, 55);
 			this.Word00.TabIndex = 0;
@@ -53,7 +54,7 @@
 			// Word01
 			// 
 			this.Word01.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word01.Location = new System.Drawing.Point(61, 133);
+			this.Word01.Location = new System.Drawing.Point(61, 157);
 			this.Word01.Name = "Word01";
 			this.Word01.Size = new System.Drawing.Size(55, 55);
 			this.Word01.TabIndex = 1;
@@ -62,7 +63,7 @@
 			// Word02
 			// 
 			this.Word02.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word02.Location = new System.Drawing.Point(121, 133);
+			this.Word02.Location = new System.Drawing.Point(121, 157);
 			this.Word02.Name = "Word02";
 			this.Word02.Size = new System.Drawing.Size(55, 55);
 			this.Word02.TabIndex = 2;
@@ -71,7 +72,7 @@
 			// Word03
 			// 
 			this.Word03.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word03.Location = new System.Drawing.Point(181, 133);
+			this.Word03.Location = new System.Drawing.Point(181, 157);
 			this.Word03.Name = "Word03";
 			this.Word03.Size = new System.Drawing.Size(55, 55);
 			this.Word03.TabIndex = 3;
@@ -80,7 +81,7 @@
 			// Word13
 			// 
 			this.Word13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word13.Location = new System.Drawing.Point(181, 193);
+			this.Word13.Location = new System.Drawing.Point(181, 217);
 			this.Word13.Name = "Word13";
 			this.Word13.Size = new System.Drawing.Size(55, 55);
 			this.Word13.TabIndex = 7;
@@ -89,7 +90,7 @@
 			// Word12
 			// 
 			this.Word12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word12.Location = new System.Drawing.Point(121, 193);
+			this.Word12.Location = new System.Drawing.Point(121, 217);
 			this.Word12.Name = "Word12";
 			this.Word12.Size = new System.Drawing.Size(55, 55);
 			this.Word12.TabIndex = 6;
@@ -98,7 +99,7 @@
 			// Word11
 			// 
 			this.Word11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word11.Location = new System.Drawing.Point(61, 193);
+			this.Word11.Location = new System.Drawing.Point(61, 217);
 			this.Word11.Name = "Word11";
 			this.Word11.Size = new System.Drawing.Size(55, 55);
 			this.Word11.TabIndex = 5;
@@ -107,7 +108,7 @@
 			// Word10
 			// 
 			this.Word10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word10.Location = new System.Drawing.Point(1, 193);
+			this.Word10.Location = new System.Drawing.Point(1, 217);
 			this.Word10.Name = "Word10";
 			this.Word10.Size = new System.Drawing.Size(55, 55);
 			this.Word10.TabIndex = 4;
@@ -134,7 +135,7 @@
 			this.EraseButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
 			this.EraseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.EraseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
-			this.EraseButton.Location = new System.Drawing.Point(31, 65);
+			this.EraseButton.Location = new System.Drawing.Point(31, 89);
 			this.EraseButton.Name = "EraseButton";
 			this.EraseButton.Size = new System.Drawing.Size(55, 55);
 			this.EraseButton.TabIndex = 9;
@@ -150,18 +151,31 @@
 			this.ConfirmButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
 			this.ConfirmButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.ConfirmButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
-			this.ConfirmButton.Location = new System.Drawing.Point(151, 65);
+			this.ConfirmButton.Location = new System.Drawing.Point(151, 89);
 			this.ConfirmButton.Name = "ConfirmButton";
 			this.ConfirmButton.Size = new System.Drawing.Size(55, 55);
 			this.ConfirmButton.TabIndex = 10;
 			this.ConfirmButton.Text = "✓";
 			this.ConfirmButton.UseVisualStyleBackColor = false;
 			// 
+			// Messages
+			// 
+			this.Messages.BackColor = System.Drawing.SystemColors.Control;
+			this.Messages.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.Messages.Font = new System.Drawing.Font("Roboto", 17F);
+			this.Messages.ForeColor = System.Drawing.Color.Black;
+			this.Messages.Location = new System.Drawing.Point(1, 56);
+			this.Messages.Name = "Messages";
+			this.Messages.Size = new System.Drawing.Size(235, 28);
+			this.Messages.TabIndex = 11;
+			this.Messages.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(238, 481);
+			this.Controls.Add(this.Messages);
 			this.Controls.Add(this.ConfirmButton);
 			this.Controls.Add(this.EraseButton);
 			this.Controls.Add(this.TextInput);
@@ -193,6 +207,7 @@
 		private System.Windows.Forms.TextBox TextInput;
 		private System.Windows.Forms.Button EraseButton;
 		private System.Windows.Forms.Button ConfirmButton;
+		private System.Windows.Forms.TextBox Messages;
 	}
 }
 

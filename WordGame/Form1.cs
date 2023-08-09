@@ -47,33 +47,39 @@ namespace WordGame
 			string word2 = startWords.Item2;
 			if (word.Length < 4)
 			{
-				Console.WriteLine("Too short!");
+				Messages.Text = "TOO SHORT";
 				Tools.wipe(TextInput);
 				return;
 			}
 			if (foundWords.Contains(word))
 			{
-				Console.WriteLine("Already found!");
+				Messages.Text = "ALREADY FOUND";
 				Tools.wipe(TextInput);
 				return;
 			}
 			if (!allWords.Contains(word))
 			{
-				Console.WriteLine("No such word!");
+				Messages.Text = "NO SUCH WORD";
 				Tools.wipe(TextInput);
 				return;
 			}
 			bool anyWord1 = (word1.Any(x => word.Any(y => y == x)));
 			bool anyWord2 = (word2.Any(x => word.Any(y => y == x)));
-			if (!(anyWord1 && anyWord2))
+			if (!anyWord1)
 			{
-				Console.WriteLine("Has to contain at least a letter from both!");
+				Messages.Text = "ADD A PINK ONE";
+				Tools.wipe(TextInput);
+				return;
+			}
+			if (!anyWord2)
+			{
+				Messages.Text = "ADD A BLUE ONE";
 				Tools.wipe(TextInput);
 				return;
 			}
 			foundWords.Add(word);
-			Console.WriteLine(word);
 			Tools.wipe(TextInput);
+			Messages.Text = $"{word.ToUpper()}";
 
 			
 
