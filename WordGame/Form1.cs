@@ -45,75 +45,36 @@ namespace WordGame
 			string word = TextInput.Text.ToLower();
 			string word1 = startWords.Item1;
 			string word2 = startWords.Item2;
-			bool alreadyFound = (foundWords.Contains(word));
-			bool inList = (allWords.Contains(word));
-			if (!inList)
+			if (word.Length < 4)
 			{
-				Console.WriteLine("No such word!");
-				foreach (char character in word)
-				{
-					Tools.erase(TextInput);
-				}
+				Console.WriteLine("Too short!");
+				Tools.wipe(TextInput);
 				return;
 			}
-			if (alreadyFound)
+			if (foundWords.Contains(word))
 			{
 				Console.WriteLine("Already found!");
-				foreach (char character in word)
-				{
-					Tools.erase(TextInput);
-				}
+				Tools.wipe(TextInput);
 				return;
 			}
-			bool bothWords = true;
-			int counter = 0;
-			foreach (char character in word)
+			if (!allWords.Contains(word))
 			{
-				if (word1.Contains(character))
-				{
-					counter ++;
-				}
-			}
-			if (counter == 0)
-			{
-				bothWords = false;
-			}
-			counter = 0;
-			foreach (char character in word)
-			{
-				if (word2.Contains(character))
-				{
-					{
-						counter ++;
-					}
-				}
-			}
-			if (counter == 0)
-			{
-				bothWords = false;
-			}
-			if (!bothWords)
-			{
-				Console.WriteLine("Has to have words from both letters!");
-				foreach (char character in word)
-				{
-					Tools.erase(TextInput);
-				}
+				Console.WriteLine("No such word!");
+				Tools.wipe(TextInput);
 				return;
 			}
-			else
+			bool anyWord1 = (word1.Any(x => word.Any(y => y == x)));
+			bool anyWord2 = (word2.Any(x => word.Any(y => y == x)));
+			if (!(anyWord1 && anyWord2))
 			{
-				foundWords.Add(word);
-				foreach (char character in word)
-				{
+				Console.WriteLine("Has to contain at least a letter from both!");
+				Tools.wipe(TextInput);
+				return;
+			}
+			foundWords.Add(word);
+			Console.WriteLine(word);
+			Tools.wipe(TextInput);
 
-					Tools.erase(TextInput);
-				}
-			}
-			foreach (string foundWord in foundWords)
-			{
-				Console.WriteLine(foundWord);
-			}
 			
 
 		}
@@ -258,6 +219,12 @@ namespace WordGame
 				textbox.Text = defaultText;
 				textbox.ForeColor = Tools.getColor("#AAAAAA");
 			}
+			resizeText(textbox, TextRenderer.MeasureText(textbox.Text, textbox.Font), false);
+		}
+		public static void wipe (TextBox textbox)
+		{
+			textbox.Text = defaultText;
+			textbox.ForeColor = Tools.getColor("#AAAAAA");
 			resizeText(textbox, TextRenderer.MeasureText(textbox.Text, textbox.Font), false);
 		}
 		public static void resizeText (TextBox textbox, Size standard_size, bool decrease=true)
