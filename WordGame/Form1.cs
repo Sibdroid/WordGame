@@ -88,6 +88,8 @@ namespace WordGame
 			Tools.wipe(TextInput);
 			Messages.Text = $"{word.ToUpper()}";
 			Messages.ForeColor = Tools.getColor("#21A179");
+			Score.Text = $"{int.Parse(Score.Text) + Tools.calculateValue(word)}";
+
 
 			
 

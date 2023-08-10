@@ -40,6 +40,7 @@
 			this.EraseButton = new System.Windows.Forms.Button();
 			this.ConfirmButton = new System.Windows.Forms.Button();
 			this.Messages = new System.Windows.Forms.TextBox();
+			this.Score = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// Word00
@@ -170,11 +171,25 @@
 			this.Messages.TabIndex = 11;
 			this.Messages.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
+			// Score
+			// 
+			this.Score.BackColor = System.Drawing.SystemColors.Control;
+			this.Score.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.Score.Font = new System.Drawing.Font("Roboto", 17F);
+			this.Score.ForeColor = System.Drawing.Color.Black;
+			this.Score.Location = new System.Drawing.Point(1, 278);
+			this.Score.Name = "Score";
+			this.Score.Size = new System.Drawing.Size(235, 28);
+			this.Score.TabIndex = 12;
+			this.Score.Text = "0";
+			this.Score.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(238, 481);
+			this.Controls.Add(this.Score);
 			this.Controls.Add(this.Messages);
 			this.Controls.Add(this.ConfirmButton);
 			this.Controls.Add(this.EraseButton);
@@ -208,6 +223,7 @@
 		private System.Windows.Forms.Button EraseButton;
 		private System.Windows.Forms.Button ConfirmButton;
 		private System.Windows.Forms.TextBox Messages;
+		private System.Windows.Forms.TextBox Score;
 	}
 }
 
