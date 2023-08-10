@@ -38,6 +38,7 @@ namespace WordGame
 			ConfirmButton.MouseEnter += ConfirmButton_MouseEnter;
 			ConfirmButton.MouseLeave += ConfirmButton_MouseLeave;
 			ConfirmButton.Click += ConfirmButton_Click;
+			ConfirmButton.Select();
 
 		}
 		private void ConfirmButton_Click(object sender, EventArgs e)
@@ -108,6 +109,55 @@ namespace WordGame
 				{
 					case "Back":
 						Tools.erase(TextInput);
+						break;
+					case "Enter":
+						string word = TextInput.Text.ToLower();
+						string word1 = startWords.Item1;
+						string word2 = startWords.Item2;
+						if (word.Length < 4)
+						{
+							Messages.Text = "TOO SHORT";
+							Messages.ForeColor = Tools.getColor("#E2C044");
+							Tools.wipe(TextInput);
+							return;
+						}
+						if (foundWords.Contains(word))
+						{
+							Messages.Text = "ALREADY FOUND";
+							Messages.ForeColor = Tools.getColor("#E2C044");
+							Tools.wipe(TextInput);
+							return;
+						}
+						if (!allWords.Contains(word))
+						{
+							Messages.Text = "NO SUCH WORD";
+							Messages.ForeColor = Tools.getColor("#E2C044");
+							Tools.wipe(TextInput);
+							return;
+						}
+						bool anyWord1 = (word1.Any(x => word.Any(y => y == x)));
+						bool anyWord2 = (word2.Any(x => word.Any(y => y == x)));
+						if (!anyWord1)
+						{
+							Messages.Text = "ADD A PINK ONE";
+							Messages.ForeColor = Tools.getColor("#E2C044");
+							Tools.wipe(TextInput);
+							return;
+						}
+						if (!anyWord2)
+						{
+							Messages.Text = "ADD A BLUE ONE";
+							Messages.ForeColor = Tools.getColor("#E2C044");
+							Tools.wipe(TextInput);
+							return;
+						}
+						foundWords.Add(word);
+						Console.WriteLine(word);
+						Console.WriteLine(Tools.calculateValue(word));
+						Tools.wipe(TextInput);
+						Messages.Text = $"{word.ToUpper()}";
+						Messages.ForeColor = Tools.getColor("#21A179");
+						Score.Text = $"{int.Parse(Score.Text) + Tools.calculateValue(word)}";
 						break;
 				}
 			}

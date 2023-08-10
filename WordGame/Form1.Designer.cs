@@ -50,6 +50,7 @@
 			this.Word00.Name = "Word00";
 			this.Word00.Size = new System.Drawing.Size(55, 55);
 			this.Word00.TabIndex = 0;
+			this.Word00.TabStop = false;
 			this.Word00.UseVisualStyleBackColor = true;
 			// 
 			// Word01
@@ -59,6 +60,7 @@
 			this.Word01.Name = "Word01";
 			this.Word01.Size = new System.Drawing.Size(55, 55);
 			this.Word01.TabIndex = 1;
+			this.Word01.TabStop = false;
 			this.Word01.UseVisualStyleBackColor = true;
 			// 
 			// Word02
@@ -68,6 +70,7 @@
 			this.Word02.Name = "Word02";
 			this.Word02.Size = new System.Drawing.Size(55, 55);
 			this.Word02.TabIndex = 2;
+			this.Word02.TabStop = false;
 			this.Word02.UseVisualStyleBackColor = true;
 			// 
 			// Word03
@@ -77,6 +80,7 @@
 			this.Word03.Name = "Word03";
 			this.Word03.Size = new System.Drawing.Size(55, 55);
 			this.Word03.TabIndex = 3;
+			this.Word03.TabStop = false;
 			this.Word03.UseVisualStyleBackColor = true;
 			// 
 			// Word13
@@ -86,6 +90,7 @@
 			this.Word13.Name = "Word13";
 			this.Word13.Size = new System.Drawing.Size(55, 55);
 			this.Word13.TabIndex = 7;
+			this.Word13.TabStop = false;
 			this.Word13.UseVisualStyleBackColor = true;
 			// 
 			// Word12
@@ -95,6 +100,7 @@
 			this.Word12.Name = "Word12";
 			this.Word12.Size = new System.Drawing.Size(55, 55);
 			this.Word12.TabIndex = 6;
+			this.Word12.TabStop = false;
 			this.Word12.UseVisualStyleBackColor = true;
 			// 
 			// Word11
@@ -104,6 +110,7 @@
 			this.Word11.Name = "Word11";
 			this.Word11.Size = new System.Drawing.Size(55, 55);
 			this.Word11.TabIndex = 5;
+			this.Word11.TabStop = false;
 			this.Word11.UseVisualStyleBackColor = true;
 			// 
 			// Word10
@@ -113,6 +120,7 @@
 			this.Word10.Name = "Word10";
 			this.Word10.Size = new System.Drawing.Size(55, 55);
 			this.Word10.TabIndex = 4;
+			this.Word10.TabStop = false;
 			this.Word10.UseVisualStyleBackColor = true;
 			// 
 			// TextInput
@@ -125,6 +133,7 @@
 			this.TextInput.Name = "TextInput";
 			this.TextInput.Size = new System.Drawing.Size(235, 49);
 			this.TextInput.TabIndex = 8;
+			this.TextInput.TabStop = false;
 			this.TextInput.Text = "Enter...";
 			this.TextInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
@@ -140,6 +149,7 @@
 			this.EraseButton.Name = "EraseButton";
 			this.EraseButton.Size = new System.Drawing.Size(55, 55);
 			this.EraseButton.TabIndex = 9;
+			this.EraseButton.TabStop = false;
 			this.EraseButton.Text = "⌫";
 			this.EraseButton.UseVisualStyleBackColor = false;
 			this.EraseButton.Click += new System.EventHandler(this.EraseButton_Click);
@@ -156,6 +166,7 @@
 			this.ConfirmButton.Name = "ConfirmButton";
 			this.ConfirmButton.Size = new System.Drawing.Size(55, 55);
 			this.ConfirmButton.TabIndex = 10;
+			this.ConfirmButton.TabStop = false;
 			this.ConfirmButton.Text = "✓";
 			this.ConfirmButton.UseVisualStyleBackColor = false;
 			// 
@@ -169,6 +180,7 @@
 			this.Messages.Name = "Messages";
 			this.Messages.Size = new System.Drawing.Size(235, 28);
 			this.Messages.TabIndex = 11;
+			this.Messages.TabStop = false;
 			this.Messages.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
 			// Score
@@ -181,6 +193,7 @@
 			this.Score.Name = "Score";
 			this.Score.Size = new System.Drawing.Size(235, 28);
 			this.Score.TabIndex = 12;
+			this.Score.TabStop = false;
 			this.Score.Text = "0";
 			this.Score.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
