@@ -41,6 +41,7 @@
 			this.ConfirmButton = new System.Windows.Forms.Button();
 			this.Messages = new System.Windows.Forms.TextBox();
 			this.Score = new System.Windows.Forms.TextBox();
+			this.Title = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// Word00
@@ -197,11 +198,26 @@
 			this.Score.Text = "0";
 			this.Score.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
+			// Title
+			// 
+			this.Title.BackColor = System.Drawing.SystemColors.Control;
+			this.Title.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.Title.Font = new System.Drawing.Font("Roboto", 17F);
+			this.Title.ForeColor = System.Drawing.Color.Black;
+			this.Title.Location = new System.Drawing.Point(1, 318);
+			this.Title.Name = "Title";
+			this.Title.Size = new System.Drawing.Size(235, 28);
+			this.Title.TabIndex = 13;
+			this.Title.TabStop = false;
+			this.Title.Text = "Basic";
+			this.Title.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(238, 481);
+			this.Controls.Add(this.Title);
 			this.Controls.Add(this.Score);
 			this.Controls.Add(this.Messages);
 			this.Controls.Add(this.ConfirmButton);
@@ -237,6 +253,7 @@
 		private System.Windows.Forms.Button ConfirmButton;
 		private System.Windows.Forms.TextBox Messages;
 		private System.Windows.Forms.TextBox Score;
+		private System.Windows.Forms.TextBox Title;
 	}
 }
 
