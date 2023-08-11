@@ -42,6 +42,7 @@
 			this.Messages = new System.Windows.Forms.TextBox();
 			this.Score = new System.Windows.Forms.TextBox();
 			this.Title = new System.Windows.Forms.TextBox();
+			this.LeftUntilNext = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// Word00
@@ -209,14 +210,28 @@
 			this.Title.Size = new System.Drawing.Size(235, 28);
 			this.Title.TabIndex = 13;
 			this.Title.TabStop = false;
-			this.Title.Text = "Basic";
+			this.Title.Text = "BASIC";
 			this.Title.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// LeftUntilNext
+			// 
+			this.LeftUntilNext.BackColor = System.Drawing.SystemColors.Control;
+			this.LeftUntilNext.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.LeftUntilNext.Font = new System.Drawing.Font("Roboto", 13F);
+			this.LeftUntilNext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.LeftUntilNext.Location = new System.Drawing.Point(1, 350);
+			this.LeftUntilNext.Name = "LeftUntilNext";
+			this.LeftUntilNext.Size = new System.Drawing.Size(235, 21);
+			this.LeftUntilNext.TabIndex = 14;
+			this.LeftUntilNext.TabStop = false;
+			this.LeftUntilNext.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(238, 481);
+			this.Controls.Add(this.LeftUntilNext);
 			this.Controls.Add(this.Title);
 			this.Controls.Add(this.Score);
 			this.Controls.Add(this.Messages);
@@ -254,6 +269,7 @@
 		private System.Windows.Forms.TextBox Messages;
 		private System.Windows.Forms.TextBox Score;
 		private System.Windows.Forms.TextBox Title;
+		private System.Windows.Forms.TextBox LeftUntilNext;
 	}
 }
 

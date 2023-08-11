@@ -87,8 +87,6 @@ namespace WordGame
 				return;
 			}
 			foundWords.Add(word);
-			Console.WriteLine(word);
-			Console.WriteLine(Tools.calculateValue(word));
 			Tools.wipe(TextInput);
 			Messages.Text = $"{word.ToUpper()}";
 			Messages.ForeColor = Tools.getColor("#21A179");
@@ -97,14 +95,33 @@ namespace WordGame
 			var titles = new [] { "Basic", "Novice", "Learner", "Scholar", "Adept", "Expert", "Genius"};
 			var thresholdsAndTitles = thresholds.Zip(titles, (i, j) => new { Threshold = i, Word = j });
 			string title = "";
+			int nextThreshold = 0;
 			foreach (var pair in thresholdsAndTitles)
 			{
 				if (int.Parse(Score.Text) >= (int)(total * pair.Threshold / 100))
 				{
-					title = pair.Word;
+					title = pair.Word.ToUpper();
+					if (pair.Threshold == 0)
+					{
+						nextThreshold++;
+					}
+					else if (pair.Threshold == 1)
+					{
+						nextThreshold = 5;
+					}
+					else if (pair.Threshold < 80)
+					{
+						nextThreshold = pair.Threshold * 2;
+					}
+				}
+				else
+				{
+					break;
 				}
 			}
+			nextThreshold = (int)(total * nextThreshold / 100);
 			Title.Text = title;
+			LeftUntilNext.Text = $"({nextThreshold - int.Parse(Score.Text)} to next)";
 
 		}
 		private void ConfirmButton_Click(object sender, EventArgs e)
