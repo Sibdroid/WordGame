@@ -19,6 +19,7 @@ namespace WordGame
 		Tuple<string, string> startWords;
 		List<string> allWords = File.ReadAllLines("words.txt").ToList();
 		List<string> foundWords = new List<string>();
+		int total;
 		public Form1()
 		{
 			InitializeComponent();
@@ -39,6 +40,8 @@ namespace WordGame
 			ConfirmButton.MouseLeave += ConfirmButton_MouseLeave;
 			ConfirmButton.Click += ConfirmButton_Click;
 			ConfirmButton.Select();
+			total = Tools.calculateTotal("words-start.txt", startWords.Item1, startWords.Item2);
+			Console.WriteLine(total);
 
 		}
 		private void ConfirmButton_Click(object sender, EventArgs e)
@@ -90,10 +93,6 @@ namespace WordGame
 			Messages.Text = $"{word.ToUpper()}";
 			Messages.ForeColor = Tools.getColor("#21A179");
 			Score.Text = $"{int.Parse(Score.Text) + Tools.calculateValue(word)}";
-
-
-			
-
 		}
 		private void Form1_KeyDown(object sender, KeyEventArgs e)
 		{
@@ -354,6 +353,22 @@ namespace WordGame
 			}
 			return value;
 
+		}
+		public static int calculateTotal(string file, string word1, string word2)
+		{
+			int total = 0;
+			List<string> words = File.ReadAllLines(file).ToList();
+			foreach (string word in words)
+			{
+				if (word1.Any(x => word.Any(y => y == x)) 
+					&& word2.Any(x => word.Any(y => y == x))
+					&& word != word1
+					&& word != word2)
+				{
+					total += calculateValue(word);
+				}
+			}
+			return total;
 		}
 	}
 }
