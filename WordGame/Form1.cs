@@ -19,7 +19,9 @@ namespace WordGame
 		Tuple<string, string> startWords;
 		List<string> allWords = File.ReadAllLines("words.txt").ToList();
 		List<string> foundWords = new List<string>();
+		List<TextBox> found = new List<TextBox>();
 		int total;
+		int index = 0;
 		public Form1()
 		{
 			InitializeComponent();
@@ -44,7 +46,7 @@ namespace WordGame
 			ConfirmButton.Click += ConfirmButton_Click;
 			ConfirmButton.Select();
 			total = Tools.calculateTotal("words-start.txt", startWords.Item1, startWords.Item2);
-			List <TextBox> found = Tools.setFound(this);
+			found = Tools.setFound(this);
 			Console.WriteLine(total);
 
 		}
@@ -91,6 +93,25 @@ namespace WordGame
 				return;
 			}
 			foundWords.Add(word);
+			if (index < 10)
+			{
+				found[index].Text = word.ToUpper();
+				Tools.resizeText(found[index], TextRenderer.MeasureText(found[index].Text, found[index].Font));
+				index++;
+				Console.WriteLine(index);
+			}
+			else
+			{
+				for (int i = 0; i < 9; i++)
+				{
+					found[i].Text = found[i + 1].Text;
+					found[i].Font = new Font(found[i].Font.Name, found[i + 1].Font.Size);
+				}
+				found[9].Text = word.ToUpper();
+				Console.WriteLine(found[9].Text);
+				//found[found.Count-1].Text = word.ToUpper();
+				//Tools.resizeText(found[found.Count-1], TextRenderer.MeasureText(found[found.Count-1].Text, found[found.Count-1].Font));
+			}
 			Tools.wipe(TextInput);
 			Messages.Text = $"{word.ToUpper()}";
 			Messages.ForeColor = Tools.getColor("#21A179");
@@ -367,7 +388,7 @@ namespace WordGame
 			List <TextBox> found = new List<TextBox>();
 			Size textBoxSize = new Size(184, 33);
 			Point startingLocation = new Point(242, 3);
-			for (int i=0; i <= 9; i++)
+			for (int i=0; i <= 10; i++)
 			{
 				TextBox newTextBox = new TextBox();
 				newTextBox.Location = startingLocation;
