@@ -49,6 +49,7 @@ namespace WordGame
 			ConfirmButton.MouseLeave += ConfirmButton_MouseLeave;
 			ConfirmButton.Click += ConfirmButton_Click;
 			ConfirmButton.Select();
+			this.MouseWheel += ScrollWords;
 			total = Tools.calculateTotal("words-start.txt", startWords.Item1, startWords.Item2);
 			found = Tools.setFound(this);
 			Console.WriteLine(total);
@@ -208,6 +209,55 @@ namespace WordGame
 		{
 			ConfirmButton.FlatAppearance.BorderColor = SystemColors.Control;
 			ConfirmButton.FlatAppearance.BorderSize = 0;
+		}
+		private void ScrollWords(object sender, MouseEventArgs e)
+		{
+			if (e.Delta > 0)
+			{
+				// up!
+				if (foundWordsDown.Count == 0)
+				{
+					return;
+				}
+				else
+				{
+					foundWordsUp.Add(foundWordsCurrent[0]);
+					foundWordsCurrent.RemoveAt(0);
+					foundWordsCurrent.Add(foundWordsUp[foundWordsUp.Count - 1]);
+					foundWordsDown.RemoveAt(0);
+					for (int i = 0; i < 10; i++)
+					{
+						if (foundWordsCurrent.ElementAtOrDefault(i) != null)
+						{
+							found[i].Text = foundWordsCurrent[i].ToUpper();
+							Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
+						}
+					}
+				}
+			}
+			if (e.Delta < 0)
+			{
+				// down!
+				if (foundWordsUp.Count == 0)
+				{
+					return;
+				}
+				else
+				{
+					foundWordsDown.Add(foundWordsCurrent[foundWordsCurrent.Count - 1]);
+					foundWordsCurrent.RemoveAt(foundWordsCurrent.Count - 1);
+					foundWordsCurrent.Insert(0, foundWordsUp[foundWordsUp.Count - 1]);
+					foundWordsUp.RemoveAt(foundWordsUp.Count - 1);
+					for (int i = 0; i < 10; i++)
+					{
+						if (foundWordsCurrent.ElementAtOrDefault(i) != null)
+						{
+							found[i].Text = foundWordsCurrent[i].ToUpper();
+							Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
+						}
+					}
+				}
+			}
 		}
 	}
 	public class Tools
