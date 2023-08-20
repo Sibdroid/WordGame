@@ -34,6 +34,9 @@ namespace WordGame
 					button.Click += buttonClick;
 				}
 			}
+			TextInput.Enabled = false;
+			TextInput.BackColor = SystemColors.Control;
+			TextInput.ForeColor = SystemColors.ControlText;
 			EraseButton.MouseEnter += EraseButton_MouseEnter;
 			EraseButton.MouseLeave += EraseButton_MouseLeave;
 			ConfirmButton.MouseEnter += ConfirmButton_MouseEnter;
@@ -41,6 +44,7 @@ namespace WordGame
 			ConfirmButton.Click += ConfirmButton_Click;
 			ConfirmButton.Select();
 			total = Tools.calculateTotal("words-start.txt", startWords.Item1, startWords.Item2);
+			List <TextBox> found = Tools.setFound(this);
 			Console.WriteLine(total);
 
 		}
@@ -357,6 +361,28 @@ namespace WordGame
 				}
 			}
 			return total;
+		}
+		public static List<TextBox> setFound(Form form)
+		{
+			List <TextBox> found = new List<TextBox>();
+			Size textBoxSize = new Size(184, 33);
+			Point startingLocation = new Point(242, 3);
+			for (int i=0; i <= 9; i++)
+			{
+				TextBox newTextBox = new TextBox();
+				newTextBox.Location = startingLocation;
+				newTextBox.Size = textBoxSize;
+				newTextBox.Enabled = false;
+				// The buttons appear invisible because their color matches the background's
+				newTextBox.BackColor = SystemColors.Control;
+				newTextBox.Font = new System.Drawing.Font(newTextBox.Font.Name, 20);
+				newTextBox.BorderStyle = BorderStyle.None;
+				newTextBox.TextAlign = HorizontalAlignment.Center;
+				startingLocation.Y += 39;
+				found.Add(newTextBox);
+				form.Controls.Add(newTextBox);
+			}
+			return found;
 		}
 	}
 }

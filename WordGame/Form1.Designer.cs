@@ -133,6 +133,7 @@
 			this.TextInput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
 			this.TextInput.Location = new System.Drawing.Point(1, 3);
 			this.TextInput.Name = "TextInput";
+			this.TextInput.ReadOnly = true;
 			this.TextInput.Size = new System.Drawing.Size(235, 49);
 			this.TextInput.TabIndex = 8;
 			this.TextInput.TabStop = false;
@@ -230,7 +231,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(238, 481);
+			this.ClientSize = new System.Drawing.Size(428, 353);
 			this.Controls.Add(this.LeftUntilNext);
 			this.Controls.Add(this.Title);
 			this.Controls.Add(this.Score);
