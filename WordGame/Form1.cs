@@ -10,12 +10,22 @@ using System.Windows.Forms;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Reflection.Emit;
+using System.Drawing.Drawing2D;
+using System.Reflection;
 
 namespace WordGame
 {
 	public partial class Form1 : Form
 	{
 		Tuple<string, string> startWords;
+		List<string> allWords = File.ReadAllLines("words.txt").ToList();
+		List<string> foundWords = new List<string>();
+		List<string> foundWordsCurrent = new List<string>();
+		List<string> foundWordsUp = new List<string>();
+		List<string> foundWordsDown = new List<string>();
+		List<TextBox> found = new List<TextBox>();
+		int total;
+		int wordsFound = 0;
 		public Form1()
 		{
 			InitializeComponent();
@@ -25,15 +35,128 @@ namespace WordGame
 			Tools.setButtons(this, startWords.Item1, startWords.Item2);
 			foreach (Button button in this.Controls.OfType<Button>())
 			{
-				button.Click += buttonClick;
+				if (!button.Name.Contains("Button"))
+				{
+					button.Click += buttonClick;
+				}
 			}
-			
+			TextInput.Enabled = false;
+			TextInput.BackColor = SystemColors.Control;
+			TextInput.ForeColor = SystemColors.ControlText;
+			EraseButton.MouseEnter += EraseButton_MouseEnter;
+			EraseButton.MouseLeave += EraseButton_MouseLeave;
+			ConfirmButton.MouseEnter += ConfirmButton_MouseEnter;
+			ConfirmButton.MouseLeave += ConfirmButton_MouseLeave;
+			ConfirmButton.Click += ConfirmButton_Click;
+			ConfirmButton.Select();
+			this.MouseWheel += ScrollWords;
+			total = Tools.calculateTotal("words-start.txt", startWords.Item1, startWords.Item2);
+			found = Tools.setFound(this);
+			Console.WriteLine(total);
+
 		}
-		private void buttonClick(object sender, EventArgs e)
+		private void ConfirmWord()
 		{
-			Button button = (Button)sender;
-			string letter = button.Text;
-			Tools.addLetter(TextInput, letter);
+			string word = TextInput.Text.ToLower();
+			string word1 = startWords.Item1;
+			string word2 = startWords.Item2;
+			if (word.Length < 4)
+			{
+				Messages.Text = "TOO SHORT";
+				Messages.ForeColor = Tools.getColor("#E2C044");
+				Tools.wipe(TextInput);
+				return;
+			}
+			if (foundWords.Contains(word))
+			{
+				Messages.Text = "ALREADY FOUND";
+				Messages.ForeColor = Tools.getColor("#E2C044");
+				Tools.wipe(TextInput);
+				return;
+			}
+			if (!allWords.Contains(word))
+			{
+				Messages.Text = "NO SUCH WORD";
+				Messages.ForeColor = Tools.getColor("#E2C044");
+				Tools.wipe(TextInput);
+				return;
+			}
+			bool anyWord1 = (word1.Any(x => word.Any(y => y == x)));
+			bool anyWord2 = (word2.Any(x => word.Any(y => y == x)));
+			if (!anyWord1)
+			{
+				Messages.Text = "ADD A PINK ONE";
+				Messages.ForeColor = Tools.getColor("#E2C044");
+				Tools.wipe(TextInput);
+				return;
+			}
+			if (!anyWord2)
+			{
+				Messages.Text = "ADD A BLUE ONE";
+				Messages.ForeColor = Tools.getColor("#E2C044");
+				Tools.wipe(TextInput);
+				return;
+			}
+			foundWords.Add(word);
+			if (wordsFound < 10)
+			{
+				foundWordsCurrent.Add(word);
+			}
+			else
+			{
+				foundWordsUp.Add(foundWordsCurrent[0]);
+				foundWordsCurrent.RemoveAt(0);
+				foundWordsCurrent.Add(word);
+			}
+			wordsFound++;
+			for (int i = 0; i < 10; i++)
+			{
+				if (foundWordsCurrent.ElementAtOrDefault(i) != null)
+				{
+					found[i].Text = foundWordsCurrent[i].ToUpper();
+					Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
+				}
+			}
+			Tools.wipe(TextInput);
+			Messages.Text = $"{word.ToUpper()}";
+			Messages.ForeColor = Tools.getColor("#21A179");
+			Score.Text = $"{int.Parse(Score.Text) + Tools.calculateValue(word)}";
+			var thresholds = new [] { 0, 1, 5, 10, 20, 40, 80 };
+			var titles = new [] { "Basic", "Novice", "Learner", "Scholar", "Adept", "Expert", "Genius"};
+			var thresholdsAndTitles = thresholds.Zip(titles, (i, j) => new { Threshold = i, Word = j });
+			string title = "";
+			int nextThreshold = 0;
+			foreach (var pair in thresholdsAndTitles)
+			{
+				if (int.Parse(Score.Text) >= (int)(total * pair.Threshold / 100))
+				{
+					title = pair.Word.ToUpper();
+					if (pair.Threshold == 0)
+					{
+						nextThreshold++;
+					}
+					else if (pair.Threshold == 1)
+					{
+						nextThreshold = 5;
+					}
+					else if (pair.Threshold < 80)
+					{
+						nextThreshold = pair.Threshold * 2;
+					}
+				}
+				else
+				{
+					break;
+				}
+			}
+			nextThreshold = (int)(total * nextThreshold / 100);
+			Title.Text = title;
+			LeftUntilNext.Text = $"({nextThreshold - int.Parse(Score.Text)} to next)";
+
+		}
+		private void ConfirmButton_Click(object sender, EventArgs e)
+		{
+			ConfirmWord();
 		}
 		private void Form1_KeyDown(object sender, KeyEventArgs e)
 		{
@@ -50,6 +173,89 @@ namespace WordGame
 					case "Back":
 						Tools.erase(TextInput);
 						break;
+					case "Enter":
+						ConfirmWord();
+						break;
+				}
+			}
+		}
+		private void buttonClick(object sender, EventArgs e)
+		{
+			Button button = (Button)sender;
+			string letter = button.Text;
+			Tools.addLetter(TextInput, letter);
+		}
+
+		private void EraseButton_Click(object sender, EventArgs e)
+		{
+			Tools.erase(TextInput);
+		}
+		private void EraseButton_MouseEnter(object sender, EventArgs e)
+		{
+			EraseButton.FlatAppearance.BorderColor = Color.Black;
+			EraseButton.FlatAppearance.BorderSize = 1;
+		}
+		private void EraseButton_MouseLeave(object sender, EventArgs e)
+		{
+			EraseButton.FlatAppearance.BorderColor = SystemColors.Control;
+			EraseButton.FlatAppearance.BorderSize = 0;
+		}
+		private void ConfirmButton_MouseEnter(object sender, EventArgs e)
+		{
+			ConfirmButton.FlatAppearance.BorderColor = Color.Black;
+			ConfirmButton.FlatAppearance.BorderSize = 1;
+		}
+		private void ConfirmButton_MouseLeave(object sender, EventArgs e)
+		{
+			ConfirmButton.FlatAppearance.BorderColor = SystemColors.Control;
+			ConfirmButton.FlatAppearance.BorderSize = 0;
+		}
+		private void ScrollWords(object sender, MouseEventArgs e)
+		{
+			if (e.Delta > 0)
+			{
+				// up!
+				if (foundWordsDown.Count == 0)
+				{
+					return;
+				}
+				else
+				{
+					foundWordsUp.Add(foundWordsCurrent[0]);
+					foundWordsCurrent.RemoveAt(0);
+					foundWordsCurrent.Add(foundWordsUp[foundWordsUp.Count - 1]);
+					foundWordsDown.RemoveAt(0);
+					for (int i = 0; i < 10; i++)
+					{
+						if (foundWordsCurrent.ElementAtOrDefault(i) != null)
+						{
+							found[i].Text = foundWordsCurrent[i].ToUpper();
+							Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
+						}
+					}
+				}
+			}
+			if (e.Delta < 0)
+			{
+				// down!
+				if (foundWordsUp.Count == 0)
+				{
+					return;
+				}
+				else
+				{
+					foundWordsDown.Add(foundWordsCurrent[foundWordsCurrent.Count - 1]);
+					foundWordsCurrent.RemoveAt(foundWordsCurrent.Count - 1);
+					foundWordsCurrent.Insert(0, foundWordsUp[foundWordsUp.Count - 1]);
+					foundWordsUp.RemoveAt(foundWordsUp.Count - 1);
+					for (int i = 0; i < 10; i++)
+					{
+						if (foundWordsCurrent.ElementAtOrDefault(i) != null)
+						{
+							found[i].Text = foundWordsCurrent[i].ToUpper();
+							Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
+						}
+					}
 				}
 			}
 		}
@@ -58,6 +264,8 @@ namespace WordGame
 	{
 		static Random random = new Random();
 		static string defaultText = "Enter...";
+		static int maxLength = 16;
+		static readonly int defaultTextSize = 30;
 		public static System.Drawing.Color getColor (string code)
 		{
 			return System.Drawing.ColorTranslator.FromHtml (code);
@@ -99,6 +307,10 @@ namespace WordGame
 				button.ForeColor = Tools.getColor("#000000");
 				button.FlatStyle = FlatStyle.Flat;
 				button.FlatAppearance.BorderSize = 1;
+				if (button.Name.Contains("Button"))
+				{
+					button.FlatAppearance.BorderSize = 0;
+				}
 				if (button.Name.Contains("Word0"))
 				{
 					button.Text = word1[button.Name[button.Name.Length - 1] - '0'].ToString().ToUpper();
@@ -113,15 +325,18 @@ namespace WordGame
 		}
 		public static void addLetter (TextBox textbox, string letter)
 		{
-			if (textbox.Text.Length == 19)
+			if (textbox.Text.Length == maxLength)
 			{
 				return;
 			}
 			if (textbox.Text == defaultText) 
 			{
 				textbox.Text = "";
+				textbox.ForeColor = Tools.getColor("#AAAAAA");
 			}
 			textbox.Text += letter;
+			textbox.ForeColor = Color.Black;
+			resizeText(textbox, TextRenderer.MeasureText(textbox.Text, textbox.Font));
 
 		}
 		public static void erase (TextBox textbox)
@@ -134,25 +349,115 @@ namespace WordGame
 			if (textbox.Text.Length == 0)
 			{
 				textbox.Text = defaultText;
+				textbox.ForeColor = Tools.getColor("#AAAAAA");
+			}
+			resizeText(textbox, TextRenderer.MeasureText(textbox.Text, textbox.Font), false);
+		}
+		public static void wipe (TextBox textbox)
+		{
+			textbox.Text = defaultText;
+			textbox.ForeColor = Tools.getColor("#AAAAAA");
+			resizeText(textbox, TextRenderer.MeasureText(textbox.Text, textbox.Font), false);
+		}
+		public static void resizeText (TextBox textbox, Size standard_size, bool decrease=true)
+		{
+			SizeF textSize = default(SizeF);
+			if (decrease)
+			{
+				do
+				{
+					using (Font font = new Font(textbox.Font.Name, textbox.Font.SizeInPoints))
+					{
+						textSize = TextRenderer.MeasureText(textbox.Text, font);
+						if (textSize.Width > textbox.Width)
+						{
+							textbox.Font = new Font(font.Name, font.SizeInPoints - 1f);
+						}
+					}
+				} while (textSize.Width > textbox.Width);
+			}
+			else
+			{
+				do
+				{
+					using (Font font = new Font(textbox.Font.Name, textbox.Font.SizeInPoints))
+					{
+						textSize = TextRenderer.MeasureText(textbox.Text, font);
+						if (textSize.Width < textbox.Width)
+						{
+							Font newFont = new Font(font.Name, font.SizeInPoints + 1f);
+							if (newFont.Size <= defaultTextSize)
+							{
+								textbox.Font = newFont;
+							}
+							else
+							{
+								return;
+							}
+						}
+					}
+				} while (textSize.Width < textbox.Width);
 			}
 		}
-		public static void resizeText (TextBox textbox)
+		public static int calculateValue(string word)
 		{
-			float height = textbox.Height * 0.99f;
-			float width = textbox.Width * 0.99f;
-			textbox.SuspendLayout();
-			Font font = textbox.Font;
-			Size size = TextRenderer.MeasureText(textbox.Text, font);
-			float heightRatio = height / size.Height;
-			float widthRatio = width / size.Width;
-			if (font.Size * Math.Min(widthRatio, heightRatio) > font.Size)
+			int value = word.Length;
+			if (4 < word.Length && word.Length < 7)
 			{
-				textbox.ResumeLayout();
-				return;
+				value++;
 			}
-			font = new Font(font.FontFamily, font.Size * Math.Min(widthRatio, heightRatio), font.Style);
-			textbox.Font = font;
-			textbox.ResumeLayout();
+			if (7 < word.Length && word.Length < 10)
+			{
+				value++;
+			}
+			if (10 < word.Length)
+			{
+				value++;
+			}
+			if (word.Distinct().Count() == 8)
+			{
+				value *= 2;
+			}
+			return value;
+
+		}
+		public static int calculateTotal(string file, string word1, string word2)
+		{
+			int total = 0;
+			List<string> words = File.ReadAllLines(file).ToList();
+			foreach (string word in words)
+			{
+				if (word1.Any(x => word.Any(y => y == x)) 
+					&& word2.Any(x => word.Any(y => y == x))
+					&& word != word1
+					&& word != word2)
+				{
+					total += calculateValue(word);
+				}
+			}
+			return total;
+		}
+		public static List<TextBox> setFound(Form form)
+		{
+			List <TextBox> found = new List<TextBox>();
+			Size textBoxSize = new Size(184, 33);
+			Point startingLocation = new Point(242, 3);
+			for (int i=0; i <= 10; i++)
+			{
+				TextBox newTextBox = new TextBox();
+				newTextBox.Location = startingLocation;
+				newTextBox.Size = textBoxSize;
+				newTextBox.Enabled = false;
+				// The buttons appear invisible because their color matches the background's
+				newTextBox.BackColor = SystemColors.Control;
+				newTextBox.Font = new System.Drawing.Font(newTextBox.Font.Name, 20);
+				newTextBox.BorderStyle = BorderStyle.None;
+				newTextBox.TextAlign = HorizontalAlignment.Center;
+				startingLocation.Y += 39;
+				found.Add(newTextBox);
+				form.Controls.Add(newTextBox);
+			}
+			return found;
 		}
 	}
 }
