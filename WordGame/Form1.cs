@@ -11,6 +11,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Reflection.Emit;
 using System.Drawing.Drawing2D;
+using System.Reflection;
 
 namespace WordGame
 {
@@ -19,9 +20,12 @@ namespace WordGame
 		Tuple<string, string> startWords;
 		List<string> allWords = File.ReadAllLines("words.txt").ToList();
 		List<string> foundWords = new List<string>();
+		List<string> foundWordsCurrent = new List<string>();
+		List<string> foundWordsUp = new List<string>();
+		List<string> foundWordsDown = new List<string>();
 		List<TextBox> found = new List<TextBox>();
 		int total;
-		int index = 0;
+		int wordsFound = 0;
 		public Form1()
 		{
 			InitializeComponent();
@@ -93,24 +97,24 @@ namespace WordGame
 				return;
 			}
 			foundWords.Add(word);
-			if (index < 10)
+			if (wordsFound < 10)
 			{
-				found[index].Text = word.ToUpper();
-				Tools.resizeText(found[index], TextRenderer.MeasureText(found[index].Text, found[index].Font));
-				index++;
-				Console.WriteLine(index);
+				foundWordsCurrent.Add(word);
 			}
 			else
 			{
-				for (int i = 0; i < 9; i++)
+				foundWordsUp.Add(foundWordsCurrent[0]);
+				foundWordsCurrent.RemoveAt(0);
+				foundWordsCurrent.Add(word);
+			}
+			wordsFound++;
+			for (int i = 0; i < 10; i++)
+			{
+				if (foundWordsCurrent.ElementAtOrDefault(i) != null)
 				{
-					found[i].Text = found[i + 1].Text;
-					found[i].Font = new Font(found[i].Font.Name, found[i + 1].Font.Size);
+					found[i].Text = foundWordsCurrent[i].ToUpper();
+					Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
 				}
-				found[9].Text = word.ToUpper();
-				Console.WriteLine(found[9].Text);
-				//found[found.Count-1].Text = word.ToUpper();
-				//Tools.resizeText(found[found.Count-1], TextRenderer.MeasureText(found[found.Count-1].Text, found[found.Count-1].Font));
 			}
 			Tools.wipe(TextInput);
 			Messages.Text = $"{word.ToUpper()}";
