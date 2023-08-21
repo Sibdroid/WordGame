@@ -105,7 +105,7 @@ namespace WordGame
 			else
 			{
 				foundWordsUp.Add(foundWordsCurrent[0]);
-				foundWordsCurrent.RemoveAt(0);
+				foundWordsCurrent.RemoveAt(0);  
 				foundWordsCurrent.Add(word);
 			}
 			wordsFound++;
@@ -221,9 +221,13 @@ namespace WordGame
 				}
 				else
 				{
+					//foundWordsUp.Add(foundWordsCurrent[0]);
+					//foundWordsCurrent.RemoveAt(0);
+					//foundWordsCurrent.Add(foundWordsDown[foundWordsDown.Count - 1]);
+					//foundWordsDown.RemoveAt(0);
 					foundWordsUp.Add(foundWordsCurrent[0]);
 					foundWordsCurrent.RemoveAt(0);
-					foundWordsCurrent.Add(foundWordsUp[foundWordsUp.Count - 1]);
+					foundWordsCurrent.Add(foundWordsDown[0]);
 					foundWordsDown.RemoveAt(0);
 					for (int i = 0; i < 10; i++)
 					{
@@ -244,7 +248,11 @@ namespace WordGame
 				}
 				else
 				{
-					foundWordsDown.Add(foundWordsCurrent[foundWordsCurrent.Count - 1]);
+					//foundWordsDown.Add(foundWordsCurrent[foundWordsCurrent.Count - 1]);
+					//foundWordsCurrent.RemoveAt(foundWordsCurrent.Count - 1);
+					//foundWordsCurrent.Insert(0, foundWordsUp[foundWordsUp.Count - 1]);
+					//foundWordsUp.RemoveAt(foundWordsUp.Count - 1);
+					foundWordsDown.Insert(0, foundWordsCurrent[foundWordsCurrent.Count - 1]);
 					foundWordsCurrent.RemoveAt(foundWordsCurrent.Count - 1);
 					foundWordsCurrent.Insert(0, foundWordsUp[foundWordsUp.Count - 1]);
 					foundWordsUp.RemoveAt(foundWordsUp.Count - 1);
