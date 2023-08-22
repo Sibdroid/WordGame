@@ -43,7 +43,8 @@
 			this.Score = new System.Windows.Forms.TextBox();
 			this.Title = new System.Windows.Forms.TextBox();
 			this.LeftUntilNext = new System.Windows.Forms.TextBox();
-			this.button1 = new System.Windows.Forms.Button();
+			this.ScrollOuter = new System.Windows.Forms.Button();
+			this.ScrollInner = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// Word00
@@ -152,7 +153,7 @@
 			// 
 			// EraseButton
 			// 
-			this.EraseButton.BackColor = System.Drawing.SystemColors.Control;
+			this.EraseButton.BackColor = System.Drawing.Color.White;
 			this.EraseButton.FlatAppearance.BorderSize = 0;
 			this.EraseButton.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
 			this.EraseButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
@@ -169,7 +170,7 @@
 			// 
 			// ConfirmButton
 			// 
-			this.ConfirmButton.BackColor = System.Drawing.SystemColors.Control;
+			this.ConfirmButton.BackColor = System.Drawing.Color.White;
 			this.ConfirmButton.FlatAppearance.BorderSize = 0;
 			this.ConfirmButton.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
 			this.ConfirmButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
@@ -182,6 +183,7 @@
 			this.ConfirmButton.TabStop = false;
 			this.ConfirmButton.Text = "✓";
 			this.ConfirmButton.UseVisualStyleBackColor = false;
+			this.ConfirmButton.Click += new System.EventHandler(this.ConfirmButton_Click_1);
 			// 
 			// Messages
 			// 
@@ -237,16 +239,32 @@
 			this.LeftUntilNext.TabStop = false;
 			this.LeftUntilNext.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
-			// button1
+			// ScrollOuter
 			// 
-			this.button1.Enabled = false;
-			this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.button1.Location = new System.Drawing.Point(432, 3);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(25, 387);
-			this.button1.TabIndex = 16;
-			this.button1.TabStop = false;
-			this.button1.UseVisualStyleBackColor = true;
+			this.ScrollOuter.Enabled = false;
+			this.ScrollOuter.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(174)))), ((int)(((byte)(174)))));
+			this.ScrollOuter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ScrollOuter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ScrollOuter.Location = new System.Drawing.Point(432, 3);
+			this.ScrollOuter.Name = "ScrollOuter";
+			this.ScrollOuter.Size = new System.Drawing.Size(25, 387);
+			this.ScrollOuter.TabIndex = 16;
+			this.ScrollOuter.TabStop = false;
+			this.ScrollOuter.UseVisualStyleBackColor = true;
+			// 
+			// ScrollInner
+			// 
+			this.ScrollInner.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(174)))), ((int)(((byte)(174)))));
+			this.ScrollInner.Enabled = false;
+			this.ScrollInner.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(174)))), ((int)(((byte)(174)))));
+			this.ScrollInner.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ScrollInner.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ScrollInner.Location = new System.Drawing.Point(437, 9);
+			this.ScrollInner.Name = "ScrollInner";
+			this.ScrollInner.Size = new System.Drawing.Size(15, 376);
+			this.ScrollInner.TabIndex = 17;
+			this.ScrollInner.TabStop = false;
+			this.ScrollInner.UseVisualStyleBackColor = false;
 			// 
 			// Form1
 			// 
@@ -254,7 +272,8 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(460, 393);
-			this.Controls.Add(this.button1);
+			this.Controls.Add(this.ScrollInner);
+			this.Controls.Add(this.ScrollOuter);
 			this.Controls.Add(this.LeftUntilNext);
 			this.Controls.Add(this.Title);
 			this.Controls.Add(this.Score);
@@ -294,7 +313,8 @@
 		private System.Windows.Forms.TextBox Score;
 		private System.Windows.Forms.TextBox Title;
 		private System.Windows.Forms.TextBox LeftUntilNext;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button ScrollOuter;
+		private System.Windows.Forms.Button ScrollInner;
 	}
 }
 

@@ -24,6 +24,8 @@ namespace WordGame
 		List<string> foundWordsUp = new List<string>();
 		List<string> foundWordsDown = new List<string>();
 		List<TextBox> found = new List<TextBox>();
+		Point defaultScrollPosition;
+		Size defaultScrollSize;
 		int total;
 		int wordsFound = 0;
 		int scrolled = 0;
@@ -50,11 +52,11 @@ namespace WordGame
 			ConfirmButton.MouseLeave += ConfirmButton_MouseLeave;
 			ConfirmButton.Click += ConfirmButton_Click;
 			ConfirmButton.Select();
+			defaultScrollPosition = ScrollInner.Location;
+			defaultScrollSize = ScrollInner.Size;
 			this.MouseWheel += ScrollWords;
 			total = Tools.calculateTotal("words-start.txt", startWords.Item1, startWords.Item2);
 			found = Tools.setFound(this);
-			Console.WriteLine(total);
-
 		}
 		private void ConfirmWord()
 		{
@@ -127,6 +129,8 @@ namespace WordGame
 				}
 			}
 			Tools.wipe(TextInput);
+			Tools.adjustScrollBar(ScrollOuter, ScrollInner, defaultScrollSize,
+				                  defaultScrollPosition, foundWordsDown, foundWordsUp, foundWords);
 			Messages.Text = $"{word.ToUpper()}";
 			Messages.ForeColor = Tools.getColor("#21A179");
 			Score.Text = $"{int.Parse(Score.Text) + Tools.calculateValue(word)}";
@@ -161,8 +165,6 @@ namespace WordGame
 			nextThreshold = (int)(total * nextThreshold / 100);
 			Title.Text = title;
 			LeftUntilNext.Text = $"({nextThreshold - int.Parse(Score.Text)} to next)";
-			Console.WriteLine(scrolled);
-
 		}
 		private void ConfirmButton_Click(object sender, EventArgs e)
 		{
@@ -261,9 +263,14 @@ namespace WordGame
 							Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
 						}
 					}
+
 					scrolled--;
 				}
 			}
+		}
+		private void ConfirmButton_Click_1(object sender, EventArgs e)
+		{
+
 		}
 	}
 	public class Tools
@@ -465,7 +472,8 @@ namespace WordGame
 			}
 			return found;
 		}
-		public static void scroll (List <string> up, List <string> current, List <string> down, List<TextBox> found, bool scrollDown = true)
+		public static void scroll(List <string> up, List <string> current, List <string> down, 
+			                      List<TextBox> found, bool scrollDown = true)
 		{
 			if (scrollDown)
 			{
@@ -497,6 +505,23 @@ namespace WordGame
 					}
 				}
 			}
+		}
+		public static void adjustScrollBar(Button outer, Button inner, Size defaultSize, Point defaultPosition, 
+			                               List <string> down, List <string> up, List <string> found)
+		{
+			int outerHeight = outer.Height;
+			int outerStart = outer.Location.X;
+			int outerEnd = outerStart + outerHeight;
+			Size newSize;
+			if (found.Count <= 10)
+			{
+				newSize = defaultSize;
+			}
+			else
+			{
+				newSize = new Size(defaultSize.Width, defaultSize.Height / found.Count * 10);
+			}
+			inner.Size = newSize;
 		}
 	}
 }
