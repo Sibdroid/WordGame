@@ -42,8 +42,8 @@ namespace WordGame
 				}
 			}
 			TextInput.Enabled = false;
-			TextInput.BackColor = SystemColors.Control;
-			TextInput.ForeColor = SystemColors.ControlText;
+			TextInput.BackColor = Color.White;
+			TextInput.ForeColor = Color.Black;
 			EraseButton.MouseEnter += EraseButton_MouseEnter;
 			EraseButton.MouseLeave += EraseButton_MouseLeave;
 			ConfirmButton.MouseEnter += ConfirmButton_MouseEnter;
@@ -455,7 +455,7 @@ namespace WordGame
 				newTextBox.Size = textBoxSize;
 				newTextBox.Enabled = false;
 				// The buttons appear invisible because their color matches the background's
-				newTextBox.BackColor = SystemColors.Control;
+				newTextBox.BackColor = Color.White;
 				newTextBox.Font = new System.Drawing.Font(newTextBox.Font.Name, 20);
 				newTextBox.BorderStyle = BorderStyle.None;
 				newTextBox.TextAlign = HorizontalAlignment.Center;
