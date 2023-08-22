@@ -26,6 +26,7 @@ namespace WordGame
 		List<TextBox> found = new List<TextBox>();
 		int total;
 		int wordsFound = 0;
+		int scrolled = 0;
 		public Form1()
 		{
 			InitializeComponent();
@@ -104,9 +105,16 @@ namespace WordGame
 			}
 			else
 			{
-				foundWordsUp.Add(foundWordsCurrent[0]);
-				foundWordsCurrent.RemoveAt(0);  
-				foundWordsCurrent.Add(word);
+				if (scrolled == 0)
+				{
+					foundWordsUp.Add(foundWordsCurrent[0]);
+					foundWordsCurrent.RemoveAt(0);
+					foundWordsCurrent.Add(word);
+				}
+				else
+				{
+					foundWordsDown.Add(word);
+				}
 			}
 			wordsFound++;
 			for (int i = 0; i < 10; i++)
@@ -152,6 +160,7 @@ namespace WordGame
 			nextThreshold = (int)(total * nextThreshold / 100);
 			Title.Text = title;
 			LeftUntilNext.Text = $"({nextThreshold - int.Parse(Score.Text)} to next)";
+			Console.WriteLine(scrolled);
 
 		}
 		private void ConfirmButton_Click(object sender, EventArgs e)
@@ -212,7 +221,7 @@ namespace WordGame
 		}
 		private void ScrollWords(object sender, MouseEventArgs e)
 		{
-			if (e.Delta > 0)
+			if (e.Delta < 0)
 			{
 				// up!
 				if (foundWordsDown.Count == 0)
@@ -221,14 +230,7 @@ namespace WordGame
 				}
 				else
 				{
-					//foundWordsUp.Add(foundWordsCurrent[0]);
-					//foundWordsCurrent.RemoveAt(0);
-					//foundWordsCurrent.Add(foundWordsDown[foundWordsDown.Count - 1]);
-					//foundWordsDown.RemoveAt(0);
-					foundWordsUp.Add(foundWordsCurrent[0]);
-					foundWordsCurrent.RemoveAt(0);
-					foundWordsCurrent.Add(foundWordsDown[0]);
-					foundWordsDown.RemoveAt(0);
+					Tools.scroll(foundWordsUp, foundWordsCurrent, foundWordsDown, found, false);
 					for (int i = 0; i < 10; i++)
 					{
 						if (foundWordsCurrent.ElementAtOrDefault(i) != null)
@@ -237,9 +239,10 @@ namespace WordGame
 							Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
 						}
 					}
+					scrolled++;
 				}
 			}
-			if (e.Delta < 0)
+			if (e.Delta > 0)
 			{
 				// down!
 				if (foundWordsUp.Count == 0)
@@ -248,14 +251,7 @@ namespace WordGame
 				}
 				else
 				{
-					//foundWordsDown.Add(foundWordsCurrent[foundWordsCurrent.Count - 1]);
-					//foundWordsCurrent.RemoveAt(foundWordsCurrent.Count - 1);
-					//foundWordsCurrent.Insert(0, foundWordsUp[foundWordsUp.Count - 1]);
-					//foundWordsUp.RemoveAt(foundWordsUp.Count - 1);
-					foundWordsDown.Insert(0, foundWordsCurrent[foundWordsCurrent.Count - 1]);
-					foundWordsCurrent.RemoveAt(foundWordsCurrent.Count - 1);
-					foundWordsCurrent.Insert(0, foundWordsUp[foundWordsUp.Count - 1]);
-					foundWordsUp.RemoveAt(foundWordsUp.Count - 1);
+					Tools.scroll(foundWordsUp, foundWordsCurrent, foundWordsDown, found);
 					for (int i = 0; i < 10; i++)
 					{
 						if (foundWordsCurrent.ElementAtOrDefault(i) != null)
@@ -264,6 +260,7 @@ namespace WordGame
 							Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
 						}
 					}
+					scrolled--;
 				}
 			}
 		}
@@ -466,6 +463,39 @@ namespace WordGame
 				form.Controls.Add(newTextBox);
 			}
 			return found;
+		}
+		public static void scroll (List <string> up, List <string> current, List <string> down, List<TextBox> found, bool scrollDown = true)
+		{
+			if (scrollDown)
+			{
+				down.Insert(0, current[current.Count - 1]);
+				current.RemoveAt(current.Count - 1);
+				current.Insert(0, up[up.Count - 1]);
+				up.RemoveAt(up.Count - 1);
+				for (int i = 0; i < 10; i++)
+				{
+					if (current.ElementAtOrDefault(i) != null)
+					{
+						found[i].Text = current[i].ToUpper();
+						Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
+					}
+				}
+			}
+			else
+			{
+				up.Add(current[0]);
+				current.RemoveAt(0);
+				current.Add(down[0]);
+				down.RemoveAt(0);
+				for (int i = 0; i < 10; i++)
+				{
+					if (current.ElementAtOrDefault(i) != null)
+					{
+						found[i].Text = current[i].ToUpper();
+						Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
+					}
+				}
+			}
 		}
 	}
 }
