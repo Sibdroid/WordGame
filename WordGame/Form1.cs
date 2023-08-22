@@ -58,6 +58,7 @@ namespace WordGame
 		}
 		private void ConfirmWord()
 		{
+			scrolled = 0;
 			string word = TextInput.Text.ToLower();
 			string word1 = startWords.Item1;
 			string word2 = startWords.Item2;
