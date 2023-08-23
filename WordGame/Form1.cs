@@ -510,18 +510,23 @@ namespace WordGame
 			                               List <string> down, List <string> up, List <string> found)
 		{
 			int outerHeight = outer.Height;
-			int outerStart = outer.Location.X;
+			int outerStart = outer.Location.Y;
 			int outerEnd = outerStart + outerHeight;
 			Size newSize;
+			Point newPosition;
 			if (found.Count <= 10)
 			{
 				newSize = defaultSize;
+				newPosition = defaultPosition;
 			}
 			else
 			{
-				newSize = new Size(defaultSize.Width, defaultSize.Height / found.Count * 10);
+				int newHeight = defaultSize.Height / found.Count * 10;
+				newSize = new Size(defaultSize.Width, newHeight);
+				newPosition = new Point(defaultPosition.X, outerEnd - newHeight - 5);
 			}
 			inner.Size = newSize;
+			inner.Location = newPosition;
 		}
 	}
 }
