@@ -53,6 +53,7 @@ namespace WordGame
 			ConfirmButton.Click += ConfirmButton_Click;
 			ConfirmButton.Select();
 			this.MouseWheel += ScrollWords;
+			this.DoubleBuffered = true;
 			total = Tools.calculateTotal("words-start.txt", startWords.Item1, startWords.Item2);
 			found = Tools.setFound(this);
 		}
@@ -69,29 +70,21 @@ namespace WordGame
 			int innerScrollHeight = outerScrollHeight - 10;
 			int innerScrollYEnd = innerScrollY + innerScrollHeight;
 			int heightMeasurement;
-			
-			using (Graphics g = e.Graphics)
+			Graphics g = e.Graphics;
+			g.Clear(Color.White);
+			Pen pen = new Pen(Color.Black, 1);
+			g.DrawRectangle(pen, outerScrollX, outerScrollY, outerScrollWidth, outerScrollHeight);
+			Brush brush = new SolidBrush(Color.DarkGray);
+			if (foundWords.Count > 10)
 			{
-				g.Clear(Color.White);
-				using (Pen pen = new Pen(Color.Black, 1))
+				innerScrollHeight = (int)Math.Round((double)innerScrollHeight * (double)10 / (double)foundWords.Count, 0);
+				innerScrollY = innerScrollYEnd - innerScrollHeight;
+				if (scrolled != 0)
 				{
-					g.DrawRectangle(pen, outerScrollX, outerScrollY, outerScrollWidth, outerScrollHeight);
+					innerScrollY += outerScrollY + 5 - innerScrollY;
 				}
-				using (Brush brush = new SolidBrush(Color.DarkGray))
-				{
-					if (foundWords.Count > 10)
-					{
-						innerScrollHeight = (int)Math.Round((double)innerScrollHeight * (double)10 / (double)foundWords.Count, 0);
-						innerScrollY = innerScrollYEnd - innerScrollHeight;
-						if (scrolled < 0)
-						{
-							innerScrollY += outerScrollY + 5 - innerScrollY;
-						}
-					}
-					g.FillRectangle(brush, innerScrollX, innerScrollY, innerScrollWidth, innerScrollHeight);
-				}
-				Console.WriteLine(scrolled);
 			}
+			g.FillRectangle(brush, innerScrollX, innerScrollY, innerScrollWidth, innerScrollHeight);
 		}
 		private void ConfirmWord()
 		{
