@@ -509,31 +509,30 @@ namespace WordGame
 				}
 			}
 		}
+		public static int getHeight(int defaultHeight, int count)
+		{
+			return defaultHeight / count * 10;
+		}
 		public static void adjustScrollBar(Button outer, Button inner, Size defaultSize, Point defaultPosition, 
 			                               List <string> down, List <string> up, List <string> found, int scrolled)
 		{
-			int outerHeight = outer.Height;
-			int outerStart = outer.Location.Y;
-			int outerEnd = outerStart + outerHeight;
+			int innerHeight = inner.Height;
+			int innerStart = inner.Location.Y;
+			int innerEnd = innerStart + innerHeight;
 			Size newSize;
 			Point newPosition;
 			int newHeight;
-			int newY;
-			int offset;
-			if (found.Count <= 10)
+			int count = found.Count;
+			if (count <= 10)
 			{
 				newSize = defaultSize;
 				newPosition = defaultPosition;
 			}
 			else
 			{
-				newHeight = defaultSize.Height / found.Count * 10;
+				newHeight = getHeight(defaultSize.Height, count); 
 				newSize = new Size(defaultSize.Width, newHeight);
-				newY = outerEnd - newHeight - 5;
-				offset = (int)Math.Round((double)(newY - defaultPosition.Y) / (double)found.Count * (double)down.Count, 0);
-				Console.WriteLine(offset);
-				newPosition = new Point(defaultPosition.X, newY - offset);
-
+				newPosition = new Point(defaultPosition.X, innerEnd - newHeight);
 			}
 			inner.Size = newSize;
 			inner.Location = newPosition;
