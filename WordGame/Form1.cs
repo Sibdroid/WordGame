@@ -79,9 +79,13 @@ namespace WordGame
 			{
 				innerScrollHeight = (int)Math.Round((double)innerScrollHeight * (double)10 / (double)foundWords.Count, 0);
 				innerScrollY = innerScrollYEnd - innerScrollHeight;
-				if (scrolled != 0)
+				if (scrolled < 0)
 				{
-					innerScrollY += outerScrollY + 5 - innerScrollY;
+					innerScrollY += (outerScrollY + 5 - innerScrollY) / (foundWordsUp.Count + 1);
+				}
+				else if (scrolled > 0)
+				{
+					innerScrollY += (outerScrollY + 5 - innerScrollY) / (foundWordsDown.Count + 1);
 				}
 			}
 			g.FillRectangle(brush, innerScrollX, innerScrollY, innerScrollWidth, innerScrollHeight);
