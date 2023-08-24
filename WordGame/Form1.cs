@@ -34,7 +34,7 @@ namespace WordGame
 			InitializeComponent();
 			this.KeyPreview = true;
 			this.KeyDown += new KeyEventHandler(Form1_KeyDown);
-			startWords = Tools.getStartWords("words-start.txt");
+			startWords = new Tuple<string, string>("wing", "step");
 			Tools.setButtons(this, startWords.Item1, startWords.Item2);
 			foreach (Button button in this.Controls.OfType<Button>())
 			{
@@ -59,13 +59,30 @@ namespace WordGame
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			base.OnPaint(e);
-			Console.WriteLine("hey");
+			int outerScrollX = 430;
+			int outerScrollY = 5;
+			int outerScrollWidth = 40;
+			int outerScrollHeight = 370;
+			int innerScrollX = outerScrollX + 5;
+			int innerScrollY = outerScrollY + 5;
+			int innerScrollWidth = outerScrollWidth - 10;
+			int innerScrollHeight = outerScrollHeight - 10;
+			int innerScrollYEnd = innerScrollY + innerScrollHeight;
 			using (Graphics g = e.Graphics)
 			{
 				g.Clear(Color.White);
-				using (Pen p = new Pen(Color.Black, 1))
+				using (Pen pen = new Pen(Color.Black, 1))
 				{
-					g.DrawRectangle(p, 430, 5, 40, 370);
+					g.DrawRectangle(pen, outerScrollX, outerScrollY, outerScrollWidth, outerScrollHeight);
+				}
+				using (Brush brush = new SolidBrush(Color.DarkGray))
+				{
+					if (foundWords.Count > 10)
+					{
+						innerScrollHeight = (int)Math.Round((double)innerScrollHeight * (double)10 / (double)foundWords.Count, 0);
+						innerScrollY = innerScrollYEnd - innerScrollHeight;
+					}
+					g.FillRectangle(brush, innerScrollX, innerScrollY, innerScrollWidth, innerScrollHeight);
 				}
 			}
 		}
@@ -174,6 +191,7 @@ namespace WordGame
 			nextThreshold = (int)(total * nextThreshold / 100);
 			Title.Text = title;
 			LeftUntilNext.Text = $"({nextThreshold - int.Parse(Score.Text)} to next)";
+			this.Refresh();
 		}
 		private void ConfirmButton_Click(object sender, EventArgs e)
 		{
