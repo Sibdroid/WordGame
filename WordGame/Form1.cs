@@ -34,7 +34,7 @@ namespace WordGame
 			InitializeComponent();
 			this.KeyPreview = true;
 			this.KeyDown += new KeyEventHandler(Form1_KeyDown);
-			startWords = new Tuple<string, string>("wing", "step");
+			startWords = Tools.getStartWords("words-start.txt");
 			Tools.setButtons(this, startWords.Item1, startWords.Item2);
 			foreach (Button button in this.Controls.OfType<Button>())
 			{
@@ -68,6 +68,8 @@ namespace WordGame
 			int innerScrollWidth = outerScrollWidth - 10;
 			int innerScrollHeight = outerScrollHeight - 10;
 			int innerScrollYEnd = innerScrollY + innerScrollHeight;
+			int heightMeasurement;
+			
 			using (Graphics g = e.Graphics)
 			{
 				g.Clear(Color.White);
@@ -81,9 +83,14 @@ namespace WordGame
 					{
 						innerScrollHeight = (int)Math.Round((double)innerScrollHeight * (double)10 / (double)foundWords.Count, 0);
 						innerScrollY = innerScrollYEnd - innerScrollHeight;
+						if (scrolled < 0)
+						{
+							innerScrollY += outerScrollY + 5 - innerScrollY;
+						}
 					}
 					g.FillRectangle(brush, innerScrollX, innerScrollY, innerScrollWidth, innerScrollHeight);
 				}
+				Console.WriteLine(scrolled);
 			}
 		}
 		private void ConfirmWord()
@@ -293,6 +300,7 @@ namespace WordGame
 					scrolled--;
 				}
 			}
+			this.Refresh();
 		}
 		private void ConfirmButton_Click_1(object sender, EventArgs e)
 		{
