@@ -56,6 +56,19 @@ namespace WordGame
 			total = Tools.calculateTotal("words-start.txt", startWords.Item1, startWords.Item2);
 			found = Tools.setFound(this);
 		}
+		protected override void OnPaint(PaintEventArgs e)
+		{
+			base.OnPaint(e);
+			Console.WriteLine("hey");
+			using (Graphics g = e.Graphics)
+			{
+				g.Clear(Color.White);
+				using (Pen p = new Pen(Color.Black, 1))
+				{
+					g.DrawRectangle(p, 430, 5, 40, 370);
+				}
+			}
+		}
 		private void ConfirmWord()
 		{
 			scrolled = 0;
