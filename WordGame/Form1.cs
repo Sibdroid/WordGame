@@ -130,7 +130,7 @@ namespace WordGame
 			}
 			Tools.wipe(TextInput);
 			Tools.adjustScrollBar(ScrollOuter, ScrollInner, defaultScrollSize,
-				                  defaultScrollPosition, foundWordsDown, foundWordsUp, foundWords);
+								  defaultScrollPosition, foundWordsDown, foundWordsUp, foundWords, scrolled);
 			Messages.Text = $"{word.ToUpper()}";
 			Messages.ForeColor = Tools.getColor("#21A179");
 			Score.Text = $"{int.Parse(Score.Text) + Tools.calculateValue(word)}";
@@ -242,6 +242,8 @@ namespace WordGame
 							Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
 						}
 					}
+					Tools.adjustScrollBar(ScrollOuter, ScrollInner, defaultScrollSize,
+										  defaultScrollPosition, foundWordsDown, foundWordsUp, foundWords, scrolled);
 					scrolled++;
 				}
 			}
@@ -263,7 +265,8 @@ namespace WordGame
 							Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
 						}
 					}
-
+					Tools.adjustScrollBar(ScrollOuter, ScrollInner, defaultScrollSize,
+										  defaultScrollPosition, foundWordsDown, foundWordsUp, foundWords, scrolled);
 					scrolled--;
 				}
 			}
@@ -507,13 +510,16 @@ namespace WordGame
 			}
 		}
 		public static void adjustScrollBar(Button outer, Button inner, Size defaultSize, Point defaultPosition, 
-			                               List <string> down, List <string> up, List <string> found)
+			                               List <string> down, List <string> up, List <string> found, int scrolled)
 		{
 			int outerHeight = outer.Height;
 			int outerStart = outer.Location.Y;
 			int outerEnd = outerStart + outerHeight;
 			Size newSize;
 			Point newPosition;
+			int newHeight;
+			int newY;
+			int offset;
 			if (found.Count <= 10)
 			{
 				newSize = defaultSize;
@@ -521,9 +527,13 @@ namespace WordGame
 			}
 			else
 			{
-				int newHeight = defaultSize.Height / found.Count * 10;
+				newHeight = defaultSize.Height / found.Count * 10;
 				newSize = new Size(defaultSize.Width, newHeight);
-				newPosition = new Point(defaultPosition.X, outerEnd - newHeight - 5);
+				newY = outerEnd - newHeight - 5;
+				offset = (int)Math.Round((double)(newY - defaultPosition.Y) / (double)found.Count * (double)down.Count, 0);
+				Console.WriteLine(offset);
+				newPosition = new Point(defaultPosition.X, newY - offset);
+
 			}
 			inner.Size = newSize;
 			inner.Location = newPosition;
