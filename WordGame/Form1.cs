@@ -52,8 +52,6 @@ namespace WordGame
 			ConfirmButton.MouseLeave += ConfirmButton_MouseLeave;
 			ConfirmButton.Click += ConfirmButton_Click;
 			ConfirmButton.Select();
-			defaultScrollPosition = ScrollInner.Location;
-			defaultScrollSize = ScrollInner.Size;
 			this.MouseWheel += ScrollWords;
 			total = Tools.calculateTotal("words-start.txt", startWords.Item1, startWords.Item2);
 			found = Tools.setFound(this);
@@ -129,8 +127,6 @@ namespace WordGame
 				}
 			}
 			Tools.wipe(TextInput);
-			Tools.adjustScrollBar(ScrollOuter, ScrollInner, defaultScrollSize,
-								  defaultScrollPosition, foundWordsDown, foundWordsUp, foundWords, scrolled);
 			Messages.Text = $"{word.ToUpper()}";
 			Messages.ForeColor = Tools.getColor("#21A179");
 			Score.Text = $"{int.Parse(Score.Text) + Tools.calculateValue(word)}";
@@ -242,8 +238,6 @@ namespace WordGame
 							Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
 						}
 					}
-					Tools.adjustScrollBar(ScrollOuter, ScrollInner, defaultScrollSize,
-										  defaultScrollPosition, foundWordsDown, foundWordsUp, foundWords, scrolled);
 					scrolled++;
 				}
 			}
@@ -265,8 +259,6 @@ namespace WordGame
 							Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
 						}
 					}
-					Tools.adjustScrollBar(ScrollOuter, ScrollInner, defaultScrollSize,
-										  defaultScrollPosition, foundWordsDown, foundWordsUp, foundWords, scrolled);
 					scrolled--;
 				}
 			}
@@ -508,34 +500,6 @@ namespace WordGame
 					}
 				}
 			}
-		}
-		public static int getHeight(int defaultHeight, int count)
-		{
-			return defaultHeight / count * 10;
-		}
-		public static void adjustScrollBar(Button outer, Button inner, Size defaultSize, Point defaultPosition, 
-			                               List <string> down, List <string> up, List <string> found, int scrolled)
-		{
-			int innerHeight = inner.Height;
-			int innerStart = inner.Location.Y;
-			int innerEnd = innerStart + innerHeight;
-			Size newSize;
-			Point newPosition;
-			int newHeight;
-			int count = found.Count;
-			if (count <= 10)
-			{
-				newSize = defaultSize;
-				newPosition = defaultPosition;
-			}
-			else
-			{
-				newHeight = getHeight(defaultSize.Height, count); 
-				newSize = new Size(defaultSize.Width, newHeight);
-				newPosition = new Point(defaultPosition.X, innerEnd - newHeight);
-			}
-			inner.Size = newSize;
-			inner.Location = newPosition;
 		}
 	}
 }
