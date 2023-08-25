@@ -47,6 +47,7 @@
 			// 
 			// Word00
 			// 
+			this.Word00.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.Word00.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Word00.Location = new System.Drawing.Point(1, 157);
 			this.Word00.Name = "Word00";
@@ -57,6 +58,7 @@
 			// 
 			// Word01
 			// 
+			this.Word01.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.Word01.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Word01.Location = new System.Drawing.Point(61, 157);
 			this.Word01.Name = "Word01";
@@ -67,6 +69,7 @@
 			// 
 			// Word02
 			// 
+			this.Word02.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.Word02.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Word02.Location = new System.Drawing.Point(121, 157);
 			this.Word02.Name = "Word02";
@@ -77,6 +80,8 @@
 			// 
 			// Word03
 			// 
+			this.Word03.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+			this.Word03.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.Word03.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Word03.Location = new System.Drawing.Point(181, 157);
 			this.Word03.Name = "Word03";
@@ -87,6 +92,7 @@
 			// 
 			// Word13
 			// 
+			this.Word13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.Word13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Word13.Location = new System.Drawing.Point(181, 217);
 			this.Word13.Name = "Word13";
@@ -97,6 +103,7 @@
 			// 
 			// Word12
 			// 
+			this.Word12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.Word12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Word12.Location = new System.Drawing.Point(121, 217);
 			this.Word12.Name = "Word12";
@@ -107,6 +114,7 @@
 			// 
 			// Word11
 			// 
+			this.Word11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.Word11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Word11.Location = new System.Drawing.Point(61, 217);
 			this.Word11.Name = "Word11";
@@ -117,6 +125,7 @@
 			// 
 			// Word10
 			// 
+			this.Word10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.Word10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Word10.Location = new System.Drawing.Point(1, 217);
 			this.Word10.Name = "Word10";
@@ -127,7 +136,7 @@
 			// 
 			// TextInput
 			// 
-			this.TextInput.BackColor = System.Drawing.SystemColors.Control;
+			this.TextInput.BackColor = System.Drawing.Color.White;
 			this.TextInput.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.TextInput.Font = new System.Drawing.Font("Roboto", 30F);
 			this.TextInput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
@@ -142,7 +151,7 @@
 			// 
 			// EraseButton
 			// 
-			this.EraseButton.BackColor = System.Drawing.SystemColors.Control;
+			this.EraseButton.BackColor = System.Drawing.Color.White;
 			this.EraseButton.FlatAppearance.BorderSize = 0;
 			this.EraseButton.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
 			this.EraseButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
@@ -159,7 +168,7 @@
 			// 
 			// ConfirmButton
 			// 
-			this.ConfirmButton.BackColor = System.Drawing.SystemColors.Control;
+			this.ConfirmButton.BackColor = System.Drawing.Color.White;
 			this.ConfirmButton.FlatAppearance.BorderSize = 0;
 			this.ConfirmButton.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
 			this.ConfirmButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
@@ -172,10 +181,11 @@
 			this.ConfirmButton.TabStop = false;
 			this.ConfirmButton.Text = "✓";
 			this.ConfirmButton.UseVisualStyleBackColor = false;
+			this.ConfirmButton.Click += new System.EventHandler(this.ConfirmButton_Click_1);
 			// 
 			// Messages
 			// 
-			this.Messages.BackColor = System.Drawing.SystemColors.Control;
+			this.Messages.BackColor = System.Drawing.Color.White;
 			this.Messages.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.Messages.Font = new System.Drawing.Font("Roboto", 17F);
 			this.Messages.ForeColor = System.Drawing.Color.Black;
@@ -188,7 +198,7 @@
 			// 
 			// Score
 			// 
-			this.Score.BackColor = System.Drawing.SystemColors.Control;
+			this.Score.BackColor = System.Drawing.Color.White;
 			this.Score.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.Score.Font = new System.Drawing.Font("Roboto", 17F);
 			this.Score.ForeColor = System.Drawing.Color.Black;
@@ -202,7 +212,7 @@
 			// 
 			// Title
 			// 
-			this.Title.BackColor = System.Drawing.SystemColors.Control;
+			this.Title.BackColor = System.Drawing.Color.White;
 			this.Title.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.Title.Font = new System.Drawing.Font("Roboto", 17F);
 			this.Title.ForeColor = System.Drawing.Color.Black;
@@ -216,7 +226,7 @@
 			// 
 			// LeftUntilNext
 			// 
-			this.LeftUntilNext.BackColor = System.Drawing.SystemColors.Control;
+			this.LeftUntilNext.BackColor = System.Drawing.Color.White;
 			this.LeftUntilNext.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.LeftUntilNext.Font = new System.Drawing.Font("Roboto", 13F);
 			this.LeftUntilNext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
@@ -231,7 +241,8 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(428, 393);
+			this.BackColor = System.Drawing.Color.White;
+			this.ClientSize = new System.Drawing.Size(475, 387);
 			this.Controls.Add(this.LeftUntilNext);
 			this.Controls.Add(this.Title);
 			this.Controls.Add(this.Score);

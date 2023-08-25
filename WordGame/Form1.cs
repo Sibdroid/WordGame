@@ -24,8 +24,11 @@ namespace WordGame
 		List<string> foundWordsUp = new List<string>();
 		List<string> foundWordsDown = new List<string>();
 		List<TextBox> found = new List<TextBox>();
+		Point defaultScrollPosition;
+		Size defaultScrollSize;
 		int total;
 		int wordsFound = 0;
+		int scrolled = 0;
 		public Form1()
 		{
 			InitializeComponent();
@@ -41,8 +44,8 @@ namespace WordGame
 				}
 			}
 			TextInput.Enabled = false;
-			TextInput.BackColor = SystemColors.Control;
-			TextInput.ForeColor = SystemColors.ControlText;
+			TextInput.BackColor = Color.White;
+			TextInput.ForeColor = Color.Black;
 			EraseButton.MouseEnter += EraseButton_MouseEnter;
 			EraseButton.MouseLeave += EraseButton_MouseLeave;
 			ConfirmButton.MouseEnter += ConfirmButton_MouseEnter;
@@ -50,13 +53,54 @@ namespace WordGame
 			ConfirmButton.Click += ConfirmButton_Click;
 			ConfirmButton.Select();
 			this.MouseWheel += ScrollWords;
+			this.DoubleBuffered = true;
 			total = Tools.calculateTotal("words-start.txt", startWords.Item1, startWords.Item2);
 			found = Tools.setFound(this);
-			Console.WriteLine(total);
-
+		}
+		protected override void OnPaint(PaintEventArgs e)
+		{
+			base.OnPaint(e);
+			int outerScrollX = 430;
+			int outerScrollY = 5;
+			int outerScrollWidth = 40;
+			int outerScrollHeight = 370;
+			int innerScrollX = outerScrollX + 5;
+			int innerScrollY = outerScrollY + 5;
+			int innerScrollWidth = outerScrollWidth - 10;
+			int innerScrollHeight = outerScrollHeight - 10;
+			int innerScrollYEnd = innerScrollY + innerScrollHeight;
+			int maxInnerScrollY;
+			int possibleValueAmount;
+			int yShiftAmount;
+			Graphics g = e.Graphics;
+			g.Clear(Color.White);
+			Pen pen = new Pen(Color.Black, 1);
+			g.DrawRectangle(pen, outerScrollX, outerScrollY, outerScrollWidth, outerScrollHeight);
+			Brush brush = new SolidBrush(Color.DarkGray);
+			if (scrolled == 0)
+			{
+				if (foundWords.Count > 10)
+				{
+					innerScrollHeight = (int)Math.Round((double)innerScrollHeight * (double)10 / (double)foundWords.Count, 0);
+				}
+				innerScrollY = innerScrollYEnd - innerScrollHeight;
+				g.FillRectangle(brush, innerScrollX, innerScrollY, innerScrollWidth, innerScrollHeight);
+				return;
+			}
+			if (foundWords.Count > 10)
+			{
+				innerScrollHeight = (int)Math.Round((double)innerScrollHeight * (double)10 / (double)foundWords.Count, 0);
+				innerScrollY = innerScrollYEnd - innerScrollHeight;
+				maxInnerScrollY = outerScrollY + outerScrollHeight - 15 - innerScrollHeight;
+				possibleValueAmount = foundWordsUp.Count + foundWordsDown.Count;
+				yShiftAmount = (int)Math.Round((double)(maxInnerScrollY) / (double)possibleValueAmount, 0);
+				innerScrollY -= (possibleValueAmount - foundWordsUp.Count) * yShiftAmount;
+			}
+			g.FillRectangle(brush, innerScrollX, innerScrollY, innerScrollWidth, innerScrollHeight);
 		}
 		private void ConfirmWord()
 		{
+			scrolled = 0;
 			string word = TextInput.Text.ToLower();
 			string word1 = startWords.Item1;
 			string word2 = startWords.Item2;
@@ -104,9 +148,16 @@ namespace WordGame
 			}
 			else
 			{
-				foundWordsUp.Add(foundWordsCurrent[0]);
-				foundWordsCurrent.RemoveAt(0);
-				foundWordsCurrent.Add(word);
+				if (scrolled == 0)
+				{
+					foundWordsUp.Add(foundWordsCurrent[0]);
+					foundWordsCurrent.RemoveAt(0);
+					foundWordsCurrent.Add(word);
+				}
+				else
+				{
+					foundWordsDown.Add(word);
+				}
 			}
 			wordsFound++;
 			for (int i = 0; i < 10; i++)
@@ -118,6 +169,7 @@ namespace WordGame
 				}
 			}
 			Tools.wipe(TextInput);
+			this.Refresh();
 			Messages.Text = $"{word.ToUpper()}";
 			Messages.ForeColor = Tools.getColor("#21A179");
 			Score.Text = $"{int.Parse(Score.Text) + Tools.calculateValue(word)}";
@@ -152,7 +204,6 @@ namespace WordGame
 			nextThreshold = (int)(total * nextThreshold / 100);
 			Title.Text = title;
 			LeftUntilNext.Text = $"({nextThreshold - int.Parse(Score.Text)} to next)";
-
 		}
 		private void ConfirmButton_Click(object sender, EventArgs e)
 		{
@@ -212,7 +263,7 @@ namespace WordGame
 		}
 		private void ScrollWords(object sender, MouseEventArgs e)
 		{
-			if (e.Delta > 0)
+			if (e.Delta < 0)
 			{
 				// up!
 				if (foundWordsDown.Count == 0)
@@ -221,10 +272,7 @@ namespace WordGame
 				}
 				else
 				{
-					foundWordsUp.Add(foundWordsCurrent[0]);
-					foundWordsCurrent.RemoveAt(0);
-					foundWordsCurrent.Add(foundWordsUp[foundWordsUp.Count - 1]);
-					foundWordsDown.RemoveAt(0);
+					Tools.scroll(foundWordsUp, foundWordsCurrent, foundWordsDown, found, false);
 					for (int i = 0; i < 10; i++)
 					{
 						if (foundWordsCurrent.ElementAtOrDefault(i) != null)
@@ -233,9 +281,10 @@ namespace WordGame
 							Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
 						}
 					}
+					scrolled++;
 				}
 			}
-			if (e.Delta < 0)
+			if (e.Delta > 0)
 			{
 				// down!
 				if (foundWordsUp.Count == 0)
@@ -244,10 +293,7 @@ namespace WordGame
 				}
 				else
 				{
-					foundWordsDown.Add(foundWordsCurrent[foundWordsCurrent.Count - 1]);
-					foundWordsCurrent.RemoveAt(foundWordsCurrent.Count - 1);
-					foundWordsCurrent.Insert(0, foundWordsUp[foundWordsUp.Count - 1]);
-					foundWordsUp.RemoveAt(foundWordsUp.Count - 1);
+					Tools.scroll(foundWordsUp, foundWordsCurrent, foundWordsDown, found);
 					for (int i = 0; i < 10; i++)
 					{
 						if (foundWordsCurrent.ElementAtOrDefault(i) != null)
@@ -256,8 +302,14 @@ namespace WordGame
 							Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
 						}
 					}
+					scrolled--;
 				}
 			}
+			this.Refresh();
+		}
+		private void ConfirmButton_Click_1(object sender, EventArgs e)
+		{
+
 		}
 	}
 	public class Tools
@@ -449,7 +501,7 @@ namespace WordGame
 				newTextBox.Size = textBoxSize;
 				newTextBox.Enabled = false;
 				// The buttons appear invisible because their color matches the background's
-				newTextBox.BackColor = SystemColors.Control;
+				newTextBox.BackColor = Color.White;
 				newTextBox.Font = new System.Drawing.Font(newTextBox.Font.Name, 20);
 				newTextBox.BorderStyle = BorderStyle.None;
 				newTextBox.TextAlign = HorizontalAlignment.Center;
@@ -458,6 +510,40 @@ namespace WordGame
 				form.Controls.Add(newTextBox);
 			}
 			return found;
+		}
+		public static void scroll(List <string> up, List <string> current, List <string> down, 
+			                      List<TextBox> found, bool scrollDown = true)
+		{
+			if (scrollDown)
+			{
+				down.Insert(0, current[current.Count - 1]);
+				current.RemoveAt(current.Count - 1);
+				current.Insert(0, up[up.Count - 1]);
+				up.RemoveAt(up.Count - 1);
+				for (int i = 0; i < 10; i++)
+				{
+					if (current.ElementAtOrDefault(i) != null)
+					{
+						found[i].Text = current[i].ToUpper();
+						Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
+					}
+				}
+			}
+			else
+			{
+				up.Add(current[0]);
+				current.RemoveAt(0);
+				current.Add(down[0]);
+				down.RemoveAt(0);
+				for (int i = 0; i < 10; i++)
+				{
+					if (current.ElementAtOrDefault(i) != null)
+					{
+						found[i].Text = current[i].ToUpper();
+						Tools.resizeText(found[i], TextRenderer.MeasureText(found[i].Text, found[i].Font));
+					}
+				}
+			}
 		}
 	}
 }
