@@ -69,24 +69,32 @@ namespace WordGame
 			int innerScrollWidth = outerScrollWidth - 10;
 			int innerScrollHeight = outerScrollHeight - 10;
 			int innerScrollYEnd = innerScrollY + innerScrollHeight;
-			int heightMeasurement;
+			int maxInnerScrollY;
+			int possibleValueAmount;
+			int yShiftAmount;
 			Graphics g = e.Graphics;
 			g.Clear(Color.White);
 			Pen pen = new Pen(Color.Black, 1);
 			g.DrawRectangle(pen, outerScrollX, outerScrollY, outerScrollWidth, outerScrollHeight);
 			Brush brush = new SolidBrush(Color.DarkGray);
+			if (scrolled == 0)
+			{
+				if (foundWords.Count > 10)
+				{
+					innerScrollHeight = (int)Math.Round((double)innerScrollHeight * (double)10 / (double)foundWords.Count, 0);
+				}
+				innerScrollY = innerScrollYEnd - innerScrollHeight;
+				g.FillRectangle(brush, innerScrollX, innerScrollY, innerScrollWidth, innerScrollHeight);
+				return;
+			}
 			if (foundWords.Count > 10)
 			{
 				innerScrollHeight = (int)Math.Round((double)innerScrollHeight * (double)10 / (double)foundWords.Count, 0);
 				innerScrollY = innerScrollYEnd - innerScrollHeight;
-				if (scrolled < 0)
-				{
-					innerScrollY += (outerScrollY + 5 - innerScrollY) / (foundWordsUp.Count + 1);
-				}
-				else if (scrolled > 0)
-				{
-					innerScrollY += (outerScrollY + 5 - innerScrollY) / (foundWordsDown.Count + 1);
-				}
+				maxInnerScrollY = outerScrollY + outerScrollHeight - 15 - innerScrollHeight;
+				possibleValueAmount = foundWordsUp.Count + foundWordsDown.Count;
+				yShiftAmount = (int)Math.Round((double)(maxInnerScrollY) / (double)possibleValueAmount, 0);
+				innerScrollY -= (possibleValueAmount - foundWordsUp.Count) * yShiftAmount;
 			}
 			g.FillRectangle(brush, innerScrollX, innerScrollY, innerScrollWidth, innerScrollHeight);
 		}
@@ -161,6 +169,7 @@ namespace WordGame
 				}
 			}
 			Tools.wipe(TextInput);
+			this.Refresh();
 			Messages.Text = $"{word.ToUpper()}";
 			Messages.ForeColor = Tools.getColor("#21A179");
 			Score.Text = $"{int.Parse(Score.Text) + Tools.calculateValue(word)}";
@@ -195,7 +204,6 @@ namespace WordGame
 			nextThreshold = (int)(total * nextThreshold / 100);
 			Title.Text = title;
 			LeftUntilNext.Text = $"({nextThreshold - int.Parse(Score.Text)} to next)";
-			this.Refresh();
 		}
 		private void ConfirmButton_Click(object sender, EventArgs e)
 		{
