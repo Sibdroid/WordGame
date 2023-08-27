@@ -134,8 +134,8 @@ namespace WordGame
 			Messages.Text = $"{word.ToUpper()}";
 			Messages.ForeColor = Tools.getColor("#21A179");
 			Score.Text = $"{int.Parse(Score.Text) + Tools.calculateValue(word)}";
-			var thresholds = new [] { 0, 1, 5, 10, 20, 40, 80 };
-			var titles = new [] { "Basic", "Novice", "Learner", "Scholar", "Adept", "Expert", "Genius"};
+			var thresholds = new[] { 0, 1, 5, 10, 20, 40, 80 };
+			var titles = new[] { "Basic", "Novice", "Learner", "Scholar", "Adept", "Expert", "Genius" };
 			var thresholdsAndTitles = thresholds.Zip(titles, (i, j) => new { Threshold = i, Word = j });
 			string title = "";
 			int nextThreshold = 0;
@@ -243,6 +243,8 @@ namespace WordGame
 						}
 					}
 					scrolled++;
+					Tools.adjustScrollBar(ScrollOuter, ScrollInner, defaultScrollSize,
+					  defaultScrollPosition, foundWordsDown, foundWordsUp, foundWords);
 				}
 			}
 			if (e.Delta > 0)
@@ -265,6 +267,8 @@ namespace WordGame
 					}
 
 					scrolled--;
+					Tools.adjustScrollBar(ScrollOuter, ScrollInner, defaultScrollSize,
+					  defaultScrollPosition, foundWordsDown, foundWordsUp, foundWords);
 				}
 			}
 		}
@@ -279,16 +283,16 @@ namespace WordGame
 		static string defaultText = "Enter...";
 		static int maxLength = 16;
 		static readonly int defaultTextSize = 30;
-		public static System.Drawing.Color getColor (string code)
+		public static System.Drawing.Color getColor(string code)
 		{
-			return System.Drawing.ColorTranslator.FromHtml (code);
+			return System.Drawing.ColorTranslator.FromHtml(code);
 		}
-		public static string getRandomString (List <string> values)
+		public static string getRandomString(List<string> values)
 		{
 			int index = random.Next(0, values.Count);
 			return values[index];
 		}
-		public static Tuple<string, string> getStartWords (string file)
+		public static Tuple<string, string> getStartWords(string file)
 		{
 			List<string> startWords1 = File.ReadAllLines(file).ToList();
 			string word1 = Tools.getRandomString(startWords1);
@@ -313,7 +317,7 @@ namespace WordGame
 			string word2 = Tools.getRandomString(startWords2);
 			return Tuple.Create(word1, word2);
 		}
-		public static void setButtons (Form form, string word1, string word2)
+		public static void setButtons(Form form, string word1, string word2)
 		{
 			foreach (Button button in form.Controls.OfType<Button>())
 			{
@@ -336,13 +340,13 @@ namespace WordGame
 				}
 			}
 		}
-		public static void addLetter (TextBox textbox, string letter)
+		public static void addLetter(TextBox textbox, string letter)
 		{
 			if (textbox.Text.Length == maxLength)
 			{
 				return;
 			}
-			if (textbox.Text == defaultText) 
+			if (textbox.Text == defaultText)
 			{
 				textbox.Text = "";
 				textbox.ForeColor = Tools.getColor("#AAAAAA");
@@ -352,7 +356,7 @@ namespace WordGame
 			resizeText(textbox, TextRenderer.MeasureText(textbox.Text, textbox.Font));
 
 		}
-		public static void erase (TextBox textbox)
+		public static void erase(TextBox textbox)
 		{
 			if (textbox.Text == defaultText)
 			{
@@ -366,13 +370,13 @@ namespace WordGame
 			}
 			resizeText(textbox, TextRenderer.MeasureText(textbox.Text, textbox.Font), false);
 		}
-		public static void wipe (TextBox textbox)
+		public static void wipe(TextBox textbox)
 		{
 			textbox.Text = defaultText;
 			textbox.ForeColor = Tools.getColor("#AAAAAA");
 			resizeText(textbox, TextRenderer.MeasureText(textbox.Text, textbox.Font), false);
 		}
-		public static void resizeText (TextBox textbox, Size standard_size, bool decrease=true)
+		public static void resizeText(TextBox textbox, Size standard_size, bool decrease = true)
 		{
 			SizeF textSize = default(SizeF);
 			if (decrease)
@@ -440,7 +444,7 @@ namespace WordGame
 			List<string> words = File.ReadAllLines(file).ToList();
 			foreach (string word in words)
 			{
-				if (word1.Any(x => word.Any(y => y == x)) 
+				if (word1.Any(x => word.Any(y => y == x))
 					&& word2.Any(x => word.Any(y => y == x))
 					&& word != word1
 					&& word != word2)
@@ -452,10 +456,10 @@ namespace WordGame
 		}
 		public static List<TextBox> setFound(Form form)
 		{
-			List <TextBox> found = new List<TextBox>();
+			List<TextBox> found = new List<TextBox>();
 			Size textBoxSize = new Size(184, 33);
 			Point startingLocation = new Point(242, 3);
-			for (int i=0; i <= 10; i++)
+			for (int i = 0; i <= 10; i++)
 			{
 				TextBox newTextBox = new TextBox();
 				newTextBox.Location = startingLocation;
@@ -472,8 +476,8 @@ namespace WordGame
 			}
 			return found;
 		}
-		public static void scroll(List <string> up, List <string> current, List <string> down, 
-			                      List<TextBox> found, bool scrollDown = true)
+		public static void scroll(List<string> up, List<string> current, List<string> down,
+								  List<TextBox> found, bool scrollDown = true)
 		{
 			if (scrollDown)
 			{
@@ -506,6 +510,11 @@ namespace WordGame
 				}
 			}
 		}
+		public static int calculateNewY(int defaultSizeHeight, int foundCount, int outerEnd)
+		{
+			int newHeight = defaultSizeHeight / foundCount * 10;
+			return outerEnd - newHeight - 5;
+		}
 		public static void adjustScrollBar(Button outer, Button inner, Size defaultSize, Point defaultPosition, 
 			                               List <string> down, List <string> up, List <string> found)
 		{
@@ -523,7 +532,13 @@ namespace WordGame
 			{
 				int newHeight = defaultSize.Height / found.Count * 10;
 				newSize = new Size(defaultSize.Width, newHeight);
-				newPosition = new Point(defaultPosition.X, outerEnd - newHeight - 5);
+				newPosition = new Point(defaultPosition.X, calculateNewY(defaultSize.Height, found.Count, outerEnd));
+				int adjustedNewY = calculateNewY(defaultSize.Height, found.Count - down.Count, outerEnd);
+				if (adjustedNewY == 0)
+				{
+					adjustedNewY = 3;
+				}
+				newPosition.Y = adjustedNewY - 5;
 			}
 			inner.Size = newSize;
 			inner.Location = newPosition;
