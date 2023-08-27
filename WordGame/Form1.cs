@@ -95,8 +95,12 @@ namespace WordGame
 				possibleValueAmount = foundWordsUp.Count + foundWordsDown.Count;
 				yShiftAmount = (int)Math.Round((double)(maxInnerScrollY) / (double)possibleValueAmount, 0);
 				innerScrollY -= (possibleValueAmount - foundWordsUp.Count) * yShiftAmount;
+				if (innerScrollY < outerScrollY + 5)
+				{
+					innerScrollY = outerScrollY + 5;
+				}
+				g.FillRectangle(brush, innerScrollX, innerScrollY, innerScrollWidth, innerScrollHeight);
 			}
-			g.FillRectangle(brush, innerScrollX, innerScrollY, innerScrollWidth, innerScrollHeight);
 		}
 		private void ConfirmWord()
 		{
