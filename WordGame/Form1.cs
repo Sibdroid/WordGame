@@ -68,21 +68,21 @@ namespace WordGame
 			if (word.Length < 4)
 			{
 				Messages.Text = "TOO SHORT";
-				Messages.ForeColor = Tools.getColor("#E2C044");
+				Messages.ForeColor = Colors.warningYellow;
 				Tools.wipe(TextInput);
 				return;
 			}
 			if (foundWords.Contains(word))
 			{
 				Messages.Text = "ALREADY FOUND";
-				Messages.ForeColor = Tools.getColor("#E2C044");
+				Messages.ForeColor = Colors.warningYellow;
 				Tools.wipe(TextInput);
 				return;
 			}
 			if (!allWords.Contains(word))
 			{
 				Messages.Text = "NO SUCH WORD";
-				Messages.ForeColor = Tools.getColor("#E2C044");
+				Messages.ForeColor = Colors.warningYellow;
 				Tools.wipe(TextInput);
 				return;
 			}
@@ -91,14 +91,14 @@ namespace WordGame
 			if (!anyWord1)
 			{
 				Messages.Text = "ADD A PINK ONE";
-				Messages.ForeColor = Tools.getColor("#E2C044");
+				Messages.ForeColor = Colors.warningYellow;
 				Tools.wipe(TextInput);
 				return;
 			}
 			if (!anyWord2)
 			{
 				Messages.Text = "ADD A BLUE ONE";
-				Messages.ForeColor = Tools.getColor("#E2C044");
+				Messages.ForeColor = Colors.warningYellow;
 				Tools.wipe(TextInput);
 				return;
 			}
@@ -133,7 +133,7 @@ namespace WordGame
 			Tools.adjustScrollBar(ScrollOuter, ScrollInner, defaultScrollSize,
 				                  defaultScrollPosition, foundWordsDown, foundWordsUp, foundWords);
 			Messages.Text = $"{word.ToUpper()}";
-			Messages.ForeColor = Tools.getColor("#21A179");
+			Messages.ForeColor = Colors.correctGreen;
 			Score.Text = $"{int.Parse(Score.Text) + Tools.calculateValue(word)}";
 			var thresholds = new[] { 0, 1, 5, 10, 20, 40, 80 };
 			var titles = new[] { "Basic", "Novice", "Learner", "Scholar", "Adept", "Expert", "Genius" };
@@ -322,7 +322,7 @@ namespace WordGame
 		{
 			foreach (Button button in form.Controls.OfType<Button>())
 			{
-				button.ForeColor = Tools.getColor("#000000");
+				button.ForeColor = Colors.pitchBlack;
 				button.FlatStyle = FlatStyle.Flat;
 				button.FlatAppearance.BorderSize = 1;
 				if (button.Name.Contains("Button"))
@@ -332,18 +332,14 @@ namespace WordGame
 				if (button.Name.Contains("Word0"))
 				{
 					button.Text = word1[button.Name[button.Name.Length - 1] - '0'].ToString().ToUpper();
-					button.BackColor = Tools.getColor("#F49FBC");
+					button.BackColor = Colors.softPink;
 				}
 				else if (button.Name.Contains("Word1"))
 				{
 					button.Text = word2[button.Name[button.Name.Length - 1] - '0'].ToString().ToUpper();
-					button.BackColor = Tools.getColor("#92BCEA");
+					button.BackColor = Colors.skyBlue;
 				}
 			}
-		}
-		public static void setTextBoxes(Form form)
-		{
-
 		}
 		public static void addLetter(TextBox textbox, string letter)
 		{
@@ -354,7 +350,7 @@ namespace WordGame
 			if (textbox.Text == defaultText)
 			{
 				textbox.Text = "";
-				textbox.ForeColor = Tools.getColor("#AAAAAA");
+				textbox.ForeColor = Colors.pitchBlack;
 			}
 			textbox.Text += letter;
 			textbox.ForeColor = Color.Black;
@@ -371,14 +367,14 @@ namespace WordGame
 			if (textbox.Text.Length == 0)
 			{
 				textbox.Text = defaultText;
-				textbox.ForeColor = Tools.getColor("#AAAAAA");
+				textbox.ForeColor = Colors.pitchBlack;
 			}
 			resizeText(textbox, TextRenderer.MeasureText(textbox.Text, textbox.Font), false);
 		}
 		public static void wipe(TextBox textbox)
 		{
 			textbox.Text = defaultText;
-			textbox.ForeColor = Tools.getColor("#AAAAAA");
+			textbox.ForeColor = Colors.pitchBlack;
 			resizeText(textbox, TextRenderer.MeasureText(textbox.Text, textbox.Font), false);
 		}
 		public static void resizeText(TextBox textbox, Size standard_size, bool decrease = true)
@@ -545,5 +541,14 @@ namespace WordGame
 			inner.Size = newSize;
 			inner.Location = newPosition;
 		}
+	}
+	public static class Colors
+	{
+		public static Color warningYellow = Tools.getColor("#e2c044");
+		public static Color correctGreen = Tools.getColor("#21a179");
+		public static Color pitchBlack = Tools.getColor("#000000");
+		public static Color softPink = Tools.getColor("#f49fbc");
+		public static Color skyBlue = Tools.getColor("#92bcea");
+		public static Color darkGrey = Tools.getColor("#aaaaaa");
 	}
 }
