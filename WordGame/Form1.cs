@@ -57,7 +57,6 @@ namespace WordGame
 			this.MouseWheel += ScrollWords;
 			total = Tools.calculateTotal("words-start.txt", startWords.Item1, startWords.Item2);
 			found = Tools.setFound(this);
-			Console.WriteLine(ScrollInner.Location.Y);
 		}
 		private void ConfirmWord()
 		{
@@ -277,6 +276,15 @@ namespace WordGame
 		{
 
 		}
+
+		private void DarkModeToggle_Click(object sender, EventArgs e)
+		{
+			foreach (Control control in this.Controls)
+			{
+				control.ForeColor = Tools.invertColor(control.ForeColor.Name);
+				control.BackColor = Tools.invertColor(control.BackColor.Name);
+			}
+		}
 	}
 	public class Tools
 	{
@@ -286,6 +294,7 @@ namespace WordGame
 		static readonly int defaultTextSize = 30;
 		public static System.Drawing.Color getColor(string code)
 		{
+			Console.WriteLine(code);
 			return System.Drawing.ColorTranslator.FromHtml(code);
 		}
 		public static string getRandomString(List<string> values)
@@ -540,6 +549,14 @@ namespace WordGame
 			}
 			inner.Size = newSize;
 			inner.Location = newPosition;
+		}
+		public static Color invertColor(string color)
+		{
+			if (color.Contains("ff"))
+			{
+				color = "#" + color.Remove(0, 2);
+			}
+			return Color.FromArgb(getColor(color).ToArgb() ^ 0xffffff);
 		}
 	}
 	public static class Colors

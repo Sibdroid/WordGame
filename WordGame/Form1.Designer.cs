@@ -45,6 +45,7 @@
 			this.Title = new System.Windows.Forms.Label();
 			this.Score = new System.Windows.Forms.Label();
 			this.Messages = new System.Windows.Forms.Label();
+			this.DarkModeButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// Word00
@@ -250,12 +251,29 @@
 			this.Messages.TabIndex = 21;
 			this.Messages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
+			// DarkModeButton
+			// 
+			this.DarkModeButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+			this.DarkModeButton.FlatAppearance.BorderSize = 0;
+			this.DarkModeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.DarkModeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
+			this.DarkModeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(192)))), ((int)(((byte)(68)))));
+			this.DarkModeButton.Location = new System.Drawing.Point(458, 3);
+			this.DarkModeButton.Name = "DarkModeButton";
+			this.DarkModeButton.Size = new System.Drawing.Size(45, 45);
+			this.DarkModeButton.TabIndex = 22;
+			this.DarkModeButton.TabStop = false;
+			this.DarkModeButton.Text = "🔆";
+			this.DarkModeButton.UseVisualStyleBackColor = true;
+			this.DarkModeButton.Click += new System.EventHandler(this.DarkModeToggle_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(460, 393);
+			this.ClientSize = new System.Drawing.Size(505, 393);
+			this.Controls.Add(this.DarkModeButton);
 			this.Controls.Add(this.Messages);
 			this.Controls.Add(this.Score);
 			this.Controls.Add(this.Title);
@@ -299,6 +317,7 @@
 		private System.Windows.Forms.Label Title;
 		private System.Windows.Forms.Label Score;
 		private System.Windows.Forms.Label Messages;
+		private System.Windows.Forms.Button DarkModeButton;
 	}
 }
 
