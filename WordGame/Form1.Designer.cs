@@ -39,12 +39,12 @@
 			this.TextInput = new System.Windows.Forms.TextBox();
 			this.EraseButton = new System.Windows.Forms.Button();
 			this.ConfirmButton = new System.Windows.Forms.Button();
-			this.Messages = new System.Windows.Forms.TextBox();
-			this.Score = new System.Windows.Forms.TextBox();
-			this.Title = new System.Windows.Forms.TextBox();
 			this.ScrollOuter = new System.Windows.Forms.Button();
 			this.ScrollInner = new System.Windows.Forms.Button();
 			this.LeftUntilNext = new System.Windows.Forms.Label();
+			this.Title = new System.Windows.Forms.Label();
+			this.Score = new System.Windows.Forms.Label();
+			this.Messages = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// Word00
@@ -185,50 +185,6 @@
 			this.ConfirmButton.UseVisualStyleBackColor = false;
 			this.ConfirmButton.Click += new System.EventHandler(this.ConfirmButton_Click_1);
 			// 
-			// Messages
-			// 
-			this.Messages.BackColor = System.Drawing.Color.White;
-			this.Messages.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.Messages.Font = new System.Drawing.Font("Roboto", 17F);
-			this.Messages.ForeColor = System.Drawing.Color.Black;
-			this.Messages.Location = new System.Drawing.Point(1, 56);
-			this.Messages.Name = "Messages";
-			this.Messages.ReadOnly = true;
-			this.Messages.Size = new System.Drawing.Size(235, 28);
-			this.Messages.TabIndex = 11;
-			this.Messages.TabStop = false;
-			this.Messages.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			// 
-			// Score
-			// 
-			this.Score.BackColor = System.Drawing.Color.White;
-			this.Score.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.Score.Font = new System.Drawing.Font("Roboto", 17F);
-			this.Score.ForeColor = System.Drawing.Color.Black;
-			this.Score.Location = new System.Drawing.Point(1, 278);
-			this.Score.Name = "Score";
-			this.Score.ReadOnly = true;
-			this.Score.Size = new System.Drawing.Size(235, 28);
-			this.Score.TabIndex = 12;
-			this.Score.TabStop = false;
-			this.Score.Text = "0";
-			this.Score.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			// 
-			// Title
-			// 
-			this.Title.BackColor = System.Drawing.Color.White;
-			this.Title.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.Title.Font = new System.Drawing.Font("Roboto", 17F);
-			this.Title.ForeColor = System.Drawing.Color.Black;
-			this.Title.Location = new System.Drawing.Point(1, 318);
-			this.Title.Name = "Title";
-			this.Title.ReadOnly = true;
-			this.Title.Size = new System.Drawing.Size(235, 28);
-			this.Title.TabIndex = 13;
-			this.Title.TabStop = false;
-			this.Title.Text = "BASIC";
-			this.Title.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			// 
 			// ScrollOuter
 			// 
 			this.ScrollOuter.Enabled = false;
@@ -258,7 +214,6 @@
 			// 
 			// LeftUntilNext
 			// 
-			this.LeftUntilNext.Enabled = false;
 			this.LeftUntilNext.Font = new System.Drawing.Font("Roboto", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.LeftUntilNext.Location = new System.Drawing.Point(1, 350);
 			this.LeftUntilNext.Name = "LeftUntilNext";
@@ -266,18 +221,47 @@
 			this.LeftUntilNext.TabIndex = 18;
 			this.LeftUntilNext.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
+			// Title
+			// 
+			this.Title.Font = new System.Drawing.Font("Roboto", 17F);
+			this.Title.Location = new System.Drawing.Point(1, 318);
+			this.Title.Name = "Title";
+			this.Title.Size = new System.Drawing.Size(235, 28);
+			this.Title.TabIndex = 19;
+			this.Title.Text = "BASIC";
+			this.Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// Score
+			// 
+			this.Score.Font = new System.Drawing.Font("Roboto", 17F);
+			this.Score.Location = new System.Drawing.Point(1, 278);
+			this.Score.Name = "Score";
+			this.Score.Size = new System.Drawing.Size(235, 28);
+			this.Score.TabIndex = 20;
+			this.Score.Text = "0";
+			this.Score.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// Messages
+			// 
+			this.Messages.Font = new System.Drawing.Font("Roboto", 17F);
+			this.Messages.Location = new System.Drawing.Point(1, 56);
+			this.Messages.Name = "Messages";
+			this.Messages.Size = new System.Drawing.Size(235, 28);
+			this.Messages.TabIndex = 21;
+			this.Messages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(460, 393);
+			this.Controls.Add(this.Messages);
+			this.Controls.Add(this.Score);
+			this.Controls.Add(this.Title);
 			this.Controls.Add(this.LeftUntilNext);
 			this.Controls.Add(this.ScrollInner);
 			this.Controls.Add(this.ScrollOuter);
-			this.Controls.Add(this.Title);
-			this.Controls.Add(this.Score);
-			this.Controls.Add(this.Messages);
 			this.Controls.Add(this.ConfirmButton);
 			this.Controls.Add(this.EraseButton);
 			this.Controls.Add(this.TextInput);
@@ -309,12 +293,12 @@
 		private System.Windows.Forms.TextBox TextInput;
 		private System.Windows.Forms.Button EraseButton;
 		private System.Windows.Forms.Button ConfirmButton;
-		private System.Windows.Forms.TextBox Messages;
-		private System.Windows.Forms.TextBox Score;
-		private System.Windows.Forms.TextBox Title;
 		private System.Windows.Forms.Button ScrollOuter;
 		private System.Windows.Forms.Button ScrollInner;
 		private System.Windows.Forms.Label LeftUntilNext;
+		private System.Windows.Forms.Label Title;
+		private System.Windows.Forms.Label Score;
+		private System.Windows.Forms.Label Messages;
 	}
 }
 
