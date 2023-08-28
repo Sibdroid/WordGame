@@ -42,9 +42,9 @@
 			this.Messages = new System.Windows.Forms.TextBox();
 			this.Score = new System.Windows.Forms.TextBox();
 			this.Title = new System.Windows.Forms.TextBox();
-			this.LeftUntilNext = new System.Windows.Forms.TextBox();
 			this.ScrollOuter = new System.Windows.Forms.Button();
 			this.ScrollInner = new System.Windows.Forms.Button();
+			this.LeftUntilNext = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// Word00
@@ -193,6 +193,7 @@
 			this.Messages.ForeColor = System.Drawing.Color.Black;
 			this.Messages.Location = new System.Drawing.Point(1, 56);
 			this.Messages.Name = "Messages";
+			this.Messages.ReadOnly = true;
 			this.Messages.Size = new System.Drawing.Size(235, 28);
 			this.Messages.TabIndex = 11;
 			this.Messages.TabStop = false;
@@ -206,6 +207,7 @@
 			this.Score.ForeColor = System.Drawing.Color.Black;
 			this.Score.Location = new System.Drawing.Point(1, 278);
 			this.Score.Name = "Score";
+			this.Score.ReadOnly = true;
 			this.Score.Size = new System.Drawing.Size(235, 28);
 			this.Score.TabIndex = 12;
 			this.Score.TabStop = false;
@@ -220,24 +222,12 @@
 			this.Title.ForeColor = System.Drawing.Color.Black;
 			this.Title.Location = new System.Drawing.Point(1, 318);
 			this.Title.Name = "Title";
+			this.Title.ReadOnly = true;
 			this.Title.Size = new System.Drawing.Size(235, 28);
 			this.Title.TabIndex = 13;
 			this.Title.TabStop = false;
 			this.Title.Text = "BASIC";
 			this.Title.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			// 
-			// LeftUntilNext
-			// 
-			this.LeftUntilNext.BackColor = System.Drawing.Color.White;
-			this.LeftUntilNext.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.LeftUntilNext.Font = new System.Drawing.Font("Roboto", 13F);
-			this.LeftUntilNext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-			this.LeftUntilNext.Location = new System.Drawing.Point(1, 350);
-			this.LeftUntilNext.Name = "LeftUntilNext";
-			this.LeftUntilNext.Size = new System.Drawing.Size(235, 21);
-			this.LeftUntilNext.TabIndex = 14;
-			this.LeftUntilNext.TabStop = false;
-			this.LeftUntilNext.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
 			// ScrollOuter
 			// 
@@ -266,15 +256,25 @@
 			this.ScrollInner.TabStop = false;
 			this.ScrollInner.UseVisualStyleBackColor = false;
 			// 
+			// LeftUntilNext
+			// 
+			this.LeftUntilNext.Enabled = false;
+			this.LeftUntilNext.Font = new System.Drawing.Font("Roboto", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.LeftUntilNext.Location = new System.Drawing.Point(1, 350);
+			this.LeftUntilNext.Name = "LeftUntilNext";
+			this.LeftUntilNext.Size = new System.Drawing.Size(235, 21);
+			this.LeftUntilNext.TabIndex = 18;
+			this.LeftUntilNext.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(460, 393);
+			this.Controls.Add(this.LeftUntilNext);
 			this.Controls.Add(this.ScrollInner);
 			this.Controls.Add(this.ScrollOuter);
-			this.Controls.Add(this.LeftUntilNext);
 			this.Controls.Add(this.Title);
 			this.Controls.Add(this.Score);
 			this.Controls.Add(this.Messages);
@@ -312,9 +312,9 @@
 		private System.Windows.Forms.TextBox Messages;
 		private System.Windows.Forms.TextBox Score;
 		private System.Windows.Forms.TextBox Title;
-		private System.Windows.Forms.TextBox LeftUntilNext;
 		private System.Windows.Forms.Button ScrollOuter;
 		private System.Windows.Forms.Button ScrollInner;
+		private System.Windows.Forms.Label LeftUntilNext;
 	}
 }
 

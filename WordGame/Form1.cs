@@ -57,6 +57,7 @@ namespace WordGame
 			this.MouseWheel += ScrollWords;
 			total = Tools.calculateTotal("words-start.txt", startWords.Item1, startWords.Item2);
 			found = Tools.setFound(this);
+			Console.WriteLine(ScrollInner.Location.Y);
 		}
 		private void ConfirmWord()
 		{
@@ -340,6 +341,10 @@ namespace WordGame
 				}
 			}
 		}
+		public static void setTextBoxes(Form form)
+		{
+
+		}
 		public static void addLetter(TextBox textbox, string letter)
 		{
 			if (textbox.Text.Length == maxLength)
@@ -534,10 +539,7 @@ namespace WordGame
 				newSize = new Size(defaultSize.Width, newHeight);
 				newPosition = new Point(defaultPosition.X, calculateNewY(defaultSize.Height, found.Count, outerEnd));
 				int adjustedNewY = calculateNewY(defaultSize.Height, found.Count - down.Count, outerEnd);
-				if (adjustedNewY == 0)
-				{
-					adjustedNewY = 3;
-				}
+				Console.WriteLine(adjustedNewY);
 				newPosition.Y = adjustedNewY - 5;
 			}
 			inner.Size = newSize;
