@@ -40,10 +40,10 @@
 			this.ConfirmButton = new System.Windows.Forms.Button();
 			this.ScrollOuter = new System.Windows.Forms.Button();
 			this.ScrollInner = new System.Windows.Forms.Button();
-			this.LeftUntilNext = new System.Windows.Forms.Label();
-			this.Title = new System.Windows.Forms.Label();
-			this.Score = new System.Windows.Forms.Label();
-			this.Messages = new System.Windows.Forms.Label();
+			this.TextLeftUntilNext = new System.Windows.Forms.Label();
+			this.TextTitle = new System.Windows.Forms.Label();
+			this.TextScore = new System.Windows.Forms.Label();
+			this.TextMessages = new System.Windows.Forms.Label();
 			this.DarkModeSwitch = new System.Windows.Forms.Button();
 			this.Word03 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
@@ -208,51 +208,51 @@
 			this.ScrollInner.TabStop = false;
 			this.ScrollInner.UseVisualStyleBackColor = false;
 			// 
-			// LeftUntilNext
+			// TextLeftUntilNext
 			// 
-			this.LeftUntilNext.Font = new System.Drawing.Font("Roboto", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.LeftUntilNext.Location = new System.Drawing.Point(1, 350);
-			this.LeftUntilNext.Name = "LeftUntilNext";
-			this.LeftUntilNext.Size = new System.Drawing.Size(235, 21);
-			this.LeftUntilNext.TabIndex = 18;
-			this.LeftUntilNext.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.TextLeftUntilNext.Font = new System.Drawing.Font("Roboto", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.TextLeftUntilNext.Location = new System.Drawing.Point(1, 350);
+			this.TextLeftUntilNext.Name = "TextLeftUntilNext";
+			this.TextLeftUntilNext.Size = new System.Drawing.Size(235, 21);
+			this.TextLeftUntilNext.TabIndex = 18;
+			this.TextLeftUntilNext.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// Title
+			// TextTitle
 			// 
-			this.Title.Font = new System.Drawing.Font("Roboto", 17F);
-			this.Title.Location = new System.Drawing.Point(1, 318);
-			this.Title.Name = "Title";
-			this.Title.Size = new System.Drawing.Size(235, 28);
-			this.Title.TabIndex = 19;
-			this.Title.Text = "BASIC";
-			this.Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.TextTitle.Font = new System.Drawing.Font("Roboto", 17F);
+			this.TextTitle.Location = new System.Drawing.Point(1, 318);
+			this.TextTitle.Name = "TextTitle";
+			this.TextTitle.Size = new System.Drawing.Size(235, 28);
+			this.TextTitle.TabIndex = 19;
+			this.TextTitle.Text = "BASIC";
+			this.TextTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// Score
+			// TextScore
 			// 
-			this.Score.Font = new System.Drawing.Font("Roboto", 17F);
-			this.Score.Location = new System.Drawing.Point(1, 278);
-			this.Score.Name = "Score";
-			this.Score.Size = new System.Drawing.Size(235, 28);
-			this.Score.TabIndex = 20;
-			this.Score.Text = "0";
-			this.Score.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.TextScore.Font = new System.Drawing.Font("Roboto", 17F);
+			this.TextScore.Location = new System.Drawing.Point(1, 278);
+			this.TextScore.Name = "TextScore";
+			this.TextScore.Size = new System.Drawing.Size(235, 28);
+			this.TextScore.TabIndex = 20;
+			this.TextScore.Text = "0";
+			this.TextScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// Messages
+			// TextMessages
 			// 
-			this.Messages.Font = new System.Drawing.Font("Roboto", 17F);
-			this.Messages.Location = new System.Drawing.Point(1, 56);
-			this.Messages.Name = "Messages";
-			this.Messages.Size = new System.Drawing.Size(235, 28);
-			this.Messages.TabIndex = 21;
-			this.Messages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.TextMessages.Font = new System.Drawing.Font("Roboto", 17F);
+			this.TextMessages.Location = new System.Drawing.Point(1, 56);
+			this.TextMessages.Name = "TextMessages";
+			this.TextMessages.Size = new System.Drawing.Size(235, 28);
+			this.TextMessages.TabIndex = 21;
+			this.TextMessages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// DarkModeSwitch
 			// 
 			this.DarkModeSwitch.FlatAppearance.BorderColor = System.Drawing.Color.Black;
 			this.DarkModeSwitch.FlatAppearance.BorderSize = 0;
 			this.DarkModeSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.DarkModeSwitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
-			this.DarkModeSwitch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(192)))), ((int)(((byte)(68)))));
+			this.DarkModeSwitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 23F);
+			this.DarkModeSwitch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(189)))), ((int)(((byte)(0)))));
 			this.DarkModeSwitch.Location = new System.Drawing.Point(458, 3);
 			this.DarkModeSwitch.Name = "DarkModeSwitch";
 			this.DarkModeSwitch.Size = new System.Drawing.Size(45, 45);
@@ -282,10 +282,10 @@
 			this.ClientSize = new System.Drawing.Size(505, 393);
 			this.Controls.Add(this.Word03);
 			this.Controls.Add(this.DarkModeSwitch);
-			this.Controls.Add(this.Messages);
-			this.Controls.Add(this.Score);
-			this.Controls.Add(this.Title);
-			this.Controls.Add(this.LeftUntilNext);
+			this.Controls.Add(this.TextMessages);
+			this.Controls.Add(this.TextScore);
+			this.Controls.Add(this.TextTitle);
+			this.Controls.Add(this.TextLeftUntilNext);
 			this.Controls.Add(this.ScrollInner);
 			this.Controls.Add(this.ScrollOuter);
 			this.Controls.Add(this.ConfirmButton);
@@ -320,10 +320,10 @@
 		private System.Windows.Forms.Button ConfirmButton;
 		private System.Windows.Forms.Button ScrollOuter;
 		private System.Windows.Forms.Button ScrollInner;
-		private System.Windows.Forms.Label LeftUntilNext;
-		private System.Windows.Forms.Label Title;
-		private System.Windows.Forms.Label Score;
-		private System.Windows.Forms.Label Messages;
+		private System.Windows.Forms.Label TextLeftUntilNext;
+		private System.Windows.Forms.Label TextTitle;
+		private System.Windows.Forms.Label TextScore;
+		private System.Windows.Forms.Label TextMessages;
 		private System.Windows.Forms.Button DarkModeSwitch;
 		private System.Windows.Forms.Button Word03;
 	}

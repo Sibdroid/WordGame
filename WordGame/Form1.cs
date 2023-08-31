@@ -67,22 +67,22 @@ namespace WordGame
 			string word2 = startWords.Item2;
 			if (word.Length < 4)
 			{
-				Messages.Text = "TOO SHORT";
-				Messages.ForeColor = Colors.warningYellow;
+				TextMessages.Text = "TOO SHORT";
+				TextMessages.ForeColor = Colors.warningYellow;
 				Tools.wipe(TextInput);
 				return;
 			}
 			if (foundWords.Contains(word))
 			{
-				Messages.Text = "ALREADY FOUND";
-				Messages.ForeColor = Colors.warningYellow;
+				TextMessages.Text = "ALREADY FOUND";
+				TextMessages.ForeColor = Colors.warningYellow;
 				Tools.wipe(TextInput);
 				return;
 			}
 			if (!allWords.Contains(word))
 			{
-				Messages.Text = "NO SUCH WORD";
-				Messages.ForeColor = Colors.warningYellow;
+				TextMessages.Text = "NO SUCH WORD";
+				TextMessages.ForeColor = Colors.warningYellow;
 				Tools.wipe(TextInput);
 				return;
 			}
@@ -90,15 +90,15 @@ namespace WordGame
 			bool anyWord2 = (word2.Any(x => word.Any(y => y == x)));
 			if (!anyWord1)
 			{
-				Messages.Text = "ADD A PINK ONE";
-				Messages.ForeColor = Colors.warningYellow;
+				TextMessages.Text = "ADD A PINK ONE";
+				TextMessages.ForeColor = Colors.warningYellow;
 				Tools.wipe(TextInput);
 				return;
 			}
 			if (!anyWord2)
 			{
-				Messages.Text = "ADD A BLUE ONE";
-				Messages.ForeColor = Colors.warningYellow;
+				TextMessages.Text = "ADD A BLUE ONE";
+				TextMessages.ForeColor = Colors.warningYellow;
 				Tools.wipe(TextInput);
 				return;
 			}
@@ -132,9 +132,9 @@ namespace WordGame
 			Tools.wipe(TextInput);
 			Tools.adjustScrollBar(ScrollOuter, ScrollInner, defaultScrollSize,
 				                  defaultScrollPosition, foundWordsDown, foundWordsUp, foundWords);
-			Messages.Text = $"{word.ToUpper()}";
-			Messages.ForeColor = Colors.correctGreen;
-			Score.Text = $"{int.Parse(Score.Text) + Tools.calculateValue(word)}";
+			TextMessages.Text = $"{word.ToUpper()}";
+			TextMessages.ForeColor = Colors.correctGreen;
+			TextScore.Text = $"{int.Parse(TextScore.Text) + Tools.calculateValue(word)}";
 			var thresholds = new[] { 0, 1, 5, 10, 20, 40, 80 };
 			var titles = new[] { "Basic", "Novice", "Learner", "Scholar", "Adept", "Expert", "Genius" };
 			var thresholdsAndTitles = thresholds.Zip(titles, (i, j) => new { Threshold = i, Word = j });
@@ -142,7 +142,7 @@ namespace WordGame
 			int nextThreshold = 0;
 			foreach (var pair in thresholdsAndTitles)
 			{
-				if (int.Parse(Score.Text) >= (int)(total * pair.Threshold / 100))
+				if (int.Parse(TextScore.Text) >= (int)(total * pair.Threshold / 100))
 				{
 					title = pair.Word.ToUpper();
 					if (pair.Threshold == 0)
@@ -164,8 +164,8 @@ namespace WordGame
 				}
 			}
 			nextThreshold = (int)(total * nextThreshold / 100);
-			Title.Text = title;
-			LeftUntilNext.Text = $"({nextThreshold - int.Parse(Score.Text)} to next)";
+			TextTitle.Text = title;
+			TextLeftUntilNext.Text = $"({nextThreshold - int.Parse(TextScore.Text)} to next)";
 		}
 		private void ConfirmButton_Click(object sender, EventArgs e)
 		{
@@ -282,9 +282,9 @@ namespace WordGame
 		{
 			foreach (Control control in this.Controls)
 			{
-				bool isButtonOrLetter = (control.Name.Contains("Word") || control.Name.Contains("Button"));
-				bool isText = (control.Name.Contains("Title") || control.Name.Contains("Score") || control.Name.Contains("Left"));
-				bool isFoundBox = (control.Name.Contains("Found"));
+				bool isButtonOrLetter = control.Name.Contains("Word") || control.Name.Contains("Button");
+				bool isText = control.Name.Contains("Text");
+				bool isFoundBox = control.Name.Contains("Found");
 				if (isDark)
 				{
 					if (isButtonOrLetter || isText || isFoundBox)
@@ -305,10 +305,16 @@ namespace WordGame
 			if (isDark)
 			{
 				this.BackColor = Color.White;
+				DarkModeSwitch.BackColor = Color.White;
+				DarkModeSwitch.ForeColor = Colors.dayYellow;
+				DarkModeSwitch.Text = "🔆";
 			}
 			else
 			{
 				this.BackColor = Color.Black;
+				DarkModeSwitch.BackColor = Color.Black;
+				DarkModeSwitch.ForeColor = Colors.nightBlue;
+				DarkModeSwitch.Text = "🌑";
 			}
 			isDark = !isDark;
 		}
@@ -357,9 +363,12 @@ namespace WordGame
 		{
 			foreach (Button button in form.Controls.OfType<Button>())
 			{
-				button.ForeColor = Colors.pitchBlack;
-				button.FlatStyle = FlatStyle.Flat;
-				button.FlatAppearance.BorderSize = 1;
+				if (!button.Name.Contains("Dark"))
+				{
+					button.ForeColor = Colors.pitchBlack;
+					button.FlatStyle = FlatStyle.Flat;
+					button.FlatAppearance.BorderSize = 1;
+				}
 				if (button.Name.Contains("Button"))
 				{
 					button.FlatAppearance.BorderSize = 0;
@@ -589,6 +598,8 @@ namespace WordGame
 	public static class Colors
 	{
 		public static Color warningYellow = Tools.getColor("#e2c044");
+		public static Color dayYellow = Tools.getColor("#ffbd00");
+		public static Color nightBlue = Tools.getColor("#0042ff");
 		public static Color correctGreen = Tools.getColor("#21a179");
 		public static Color pitchBlack = Tools.getColor("#000000");
 		public static Color softPink = Tools.getColor("#f49fbc");
