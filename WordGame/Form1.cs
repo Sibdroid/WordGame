@@ -39,7 +39,7 @@ namespace WordGame
 			Tools.setButtons(this, startWords.Item1, startWords.Item2);
 			foreach (Button button in this.Controls.OfType<Button>())
 			{
-				if (!button.Name.Contains("Button"))
+				if (!button.Name.Contains("Button") && !button.Name.Contains("Switch"))
 				{
 					button.Click += buttonClick;
 				}
@@ -282,12 +282,12 @@ namespace WordGame
 		{
 			foreach (Control control in this.Controls)
 			{
-				Console.WriteLine(control.Name);
-				Console.WriteLine(control.Name.Contains("Word"));
-				Console.WriteLine();
+				bool isButtonOrLetter = (control.Name.Contains("Word") || control.Name.Contains("Button"));
+				bool isText = (control.Name.Contains("Title") || control.Name.Contains("Score") || control.Name.Contains("Left"));
+				bool isFoundBox = (control.Name.Contains("Found"));
 				if (isDark)
 				{
-					if (control.Name.Contains("Word"))
+					if (isButtonOrLetter || isText || isFoundBox)
 					{
 						control.BackColor = Color.White;
 						control.ForeColor = Color.Black;
@@ -295,12 +295,20 @@ namespace WordGame
 				}
 				else
 				{
-					if (control.Name.Contains("Word"))
+					if (isButtonOrLetter || isText || isFoundBox)
 					{
 						control.BackColor = Color.Black;
 						control.ForeColor = Color.White;
 					}
 				}
+			}
+			if (isDark)
+			{
+				this.BackColor = Color.White;
+			}
+			else
+			{
+				this.BackColor = Color.Black;
 			}
 			isDark = !isDark;
 		}
@@ -490,6 +498,7 @@ namespace WordGame
 			for (int i = 0; i <= 10; i++)
 			{
 				TextBox newTextBox = new TextBox();
+				newTextBox.Name = $"FoundBox{i}";
 				newTextBox.Location = startingLocation;
 				newTextBox.Size = textBoxSize;
 				newTextBox.Enabled = false;

@@ -31,7 +31,6 @@
 			this.Word00 = new System.Windows.Forms.Button();
 			this.Word01 = new System.Windows.Forms.Button();
 			this.Word02 = new System.Windows.Forms.Button();
-			this.Word03 = new System.Windows.Forms.Button();
 			this.Word13 = new System.Windows.Forms.Button();
 			this.Word12 = new System.Windows.Forms.Button();
 			this.Word11 = new System.Windows.Forms.Button();
@@ -45,7 +44,8 @@
 			this.Title = new System.Windows.Forms.Label();
 			this.Score = new System.Windows.Forms.Label();
 			this.Messages = new System.Windows.Forms.Label();
-			this.DarkModeButton = new System.Windows.Forms.Button();
+			this.DarkModeSwitch = new System.Windows.Forms.Button();
+			this.Word03 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// Word00
@@ -83,19 +83,6 @@
 			this.Word02.TabIndex = 2;
 			this.Word02.TabStop = false;
 			this.Word02.UseVisualStyleBackColor = true;
-			// 
-			// Word03
-			// 
-			this.Word03.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-			this.Word03.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.Word03.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Word03.ForeColor = System.Drawing.Color.Black;
-			this.Word03.Location = new System.Drawing.Point(181, 157);
-			this.Word03.Name = "Word03";
-			this.Word03.Size = new System.Drawing.Size(55, 55);
-			this.Word03.TabIndex = 3;
-			this.Word03.TabStop = false;
-			this.Word03.UseVisualStyleBackColor = true;
 			// 
 			// Word13
 			// 
@@ -259,21 +246,33 @@
 			this.Messages.TabIndex = 21;
 			this.Messages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// DarkModeButton
+			// DarkModeSwitch
 			// 
-			this.DarkModeButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-			this.DarkModeButton.FlatAppearance.BorderSize = 0;
-			this.DarkModeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.DarkModeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
-			this.DarkModeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(192)))), ((int)(((byte)(68)))));
-			this.DarkModeButton.Location = new System.Drawing.Point(458, 3);
-			this.DarkModeButton.Name = "DarkModeButton";
-			this.DarkModeButton.Size = new System.Drawing.Size(45, 45);
-			this.DarkModeButton.TabIndex = 22;
-			this.DarkModeButton.TabStop = false;
-			this.DarkModeButton.Text = "🔆";
-			this.DarkModeButton.UseVisualStyleBackColor = true;
-			this.DarkModeButton.Click += new System.EventHandler(this.DarkModeToggle_Click);
+			this.DarkModeSwitch.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+			this.DarkModeSwitch.FlatAppearance.BorderSize = 0;
+			this.DarkModeSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.DarkModeSwitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
+			this.DarkModeSwitch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(192)))), ((int)(((byte)(68)))));
+			this.DarkModeSwitch.Location = new System.Drawing.Point(458, 3);
+			this.DarkModeSwitch.Name = "DarkModeSwitch";
+			this.DarkModeSwitch.Size = new System.Drawing.Size(45, 45);
+			this.DarkModeSwitch.TabIndex = 22;
+			this.DarkModeSwitch.TabStop = false;
+			this.DarkModeSwitch.Text = "🔆";
+			this.DarkModeSwitch.UseVisualStyleBackColor = true;
+			this.DarkModeSwitch.Click += new System.EventHandler(this.DarkModeToggle_Click);
+			// 
+			// Word03
+			// 
+			this.Word03.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.Word03.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.Word03.ForeColor = System.Drawing.Color.Black;
+			this.Word03.Location = new System.Drawing.Point(181, 157);
+			this.Word03.Name = "Word03";
+			this.Word03.Size = new System.Drawing.Size(55, 55);
+			this.Word03.TabIndex = 23;
+			this.Word03.TabStop = false;
+			this.Word03.UseVisualStyleBackColor = true;
 			// 
 			// Form1
 			// 
@@ -281,7 +280,8 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(505, 393);
-			this.Controls.Add(this.DarkModeButton);
+			this.Controls.Add(this.Word03);
+			this.Controls.Add(this.DarkModeSwitch);
 			this.Controls.Add(this.Messages);
 			this.Controls.Add(this.Score);
 			this.Controls.Add(this.Title);
@@ -295,7 +295,6 @@
 			this.Controls.Add(this.Word12);
 			this.Controls.Add(this.Word11);
 			this.Controls.Add(this.Word10);
-			this.Controls.Add(this.Word03);
 			this.Controls.Add(this.Word02);
 			this.Controls.Add(this.Word01);
 			this.Controls.Add(this.Word00);
@@ -312,7 +311,6 @@
 		private System.Windows.Forms.Button Word00;
 		private System.Windows.Forms.Button Word01;
 		private System.Windows.Forms.Button Word02;
-		private System.Windows.Forms.Button Word03;
 		private System.Windows.Forms.Button Word13;
 		private System.Windows.Forms.Button Word12;
 		private System.Windows.Forms.Button Word11;
@@ -326,7 +324,8 @@
 		private System.Windows.Forms.Label Title;
 		private System.Windows.Forms.Label Score;
 		private System.Windows.Forms.Label Messages;
-		private System.Windows.Forms.Button DarkModeButton;
+		private System.Windows.Forms.Button DarkModeSwitch;
+		private System.Windows.Forms.Button Word03;
 	}
 }
 
