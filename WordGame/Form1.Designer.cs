@@ -52,6 +52,7 @@
 			// 
 			this.Word00.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.Word00.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.Word00.ForeColor = System.Drawing.Color.Black;
 			this.Word00.Location = new System.Drawing.Point(1, 157);
 			this.Word00.Name = "Word00";
 			this.Word00.Size = new System.Drawing.Size(55, 55);
@@ -63,6 +64,7 @@
 			// 
 			this.Word01.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.Word01.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.Word01.ForeColor = System.Drawing.Color.Black;
 			this.Word01.Location = new System.Drawing.Point(61, 157);
 			this.Word01.Name = "Word01";
 			this.Word01.Size = new System.Drawing.Size(55, 55);
@@ -74,6 +76,7 @@
 			// 
 			this.Word02.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.Word02.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.Word02.ForeColor = System.Drawing.Color.Black;
 			this.Word02.Location = new System.Drawing.Point(121, 157);
 			this.Word02.Name = "Word02";
 			this.Word02.Size = new System.Drawing.Size(55, 55);
@@ -86,6 +89,7 @@
 			this.Word03.FlatAppearance.BorderColor = System.Drawing.Color.Black;
 			this.Word03.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.Word03.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.Word03.ForeColor = System.Drawing.Color.Black;
 			this.Word03.Location = new System.Drawing.Point(181, 157);
 			this.Word03.Name = "Word03";
 			this.Word03.Size = new System.Drawing.Size(55, 55);
@@ -97,6 +101,7 @@
 			// 
 			this.Word13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.Word13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.Word13.ForeColor = System.Drawing.Color.Black;
 			this.Word13.Location = new System.Drawing.Point(181, 217);
 			this.Word13.Name = "Word13";
 			this.Word13.Size = new System.Drawing.Size(55, 55);
@@ -108,6 +113,7 @@
 			// 
 			this.Word12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.Word12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.Word12.ForeColor = System.Drawing.Color.Black;
 			this.Word12.Location = new System.Drawing.Point(121, 217);
 			this.Word12.Name = "Word12";
 			this.Word12.Size = new System.Drawing.Size(55, 55);
@@ -119,6 +125,7 @@
 			// 
 			this.Word11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.Word11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.Word11.ForeColor = System.Drawing.Color.Black;
 			this.Word11.Location = new System.Drawing.Point(61, 217);
 			this.Word11.Name = "Word11";
 			this.Word11.Size = new System.Drawing.Size(55, 55);
@@ -130,6 +137,7 @@
 			// 
 			this.Word10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.Word10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.Word10.ForeColor = System.Drawing.Color.Black;
 			this.Word10.Location = new System.Drawing.Point(1, 217);
 			this.Word10.Name = "Word10";
 			this.Word10.Size = new System.Drawing.Size(55, 55);
@@ -291,6 +299,7 @@
 			this.Controls.Add(this.Word02);
 			this.Controls.Add(this.Word01);
 			this.Controls.Add(this.Word00);
+			this.ForeColor = System.Drawing.Color.Black;
 			this.Name = "Form1";
 			this.Text = "Form1";
 			this.ResumeLayout(false);

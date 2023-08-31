@@ -29,6 +29,7 @@ namespace WordGame
 		int total;
 		int wordsFound = 0;
 		int scrolled = 0;
+		bool isDark = false;
 		public Form1()
 		{
 			InitializeComponent();
@@ -281,9 +282,27 @@ namespace WordGame
 		{
 			foreach (Control control in this.Controls)
 			{
-				control.ForeColor = Tools.invertColor(control.ForeColor.Name);
-				control.BackColor = Tools.invertColor(control.BackColor.Name);
+				Console.WriteLine(control.Name);
+				Console.WriteLine(control.Name.Contains("Word"));
+				Console.WriteLine();
+				if (isDark)
+				{
+					if (control.Name.Contains("Word"))
+					{
+						control.BackColor = Color.White;
+						control.ForeColor = Color.Black;
+					}
+				}
+				else
+				{
+					if (control.Name.Contains("Word"))
+					{
+						control.BackColor = Color.Black;
+						control.ForeColor = Color.White;
+					}
+				}
 			}
+			isDark = !isDark;
 		}
 	}
 	public class Tools
@@ -294,7 +313,6 @@ namespace WordGame
 		static readonly int defaultTextSize = 30;
 		public static System.Drawing.Color getColor(string code)
 		{
-			Console.WriteLine(code);
 			return System.Drawing.ColorTranslator.FromHtml(code);
 		}
 		public static string getRandomString(List<string> values)
