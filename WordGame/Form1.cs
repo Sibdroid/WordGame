@@ -282,23 +282,41 @@ namespace WordGame
 		{
 			foreach (Control control in this.Controls)
 			{
-				bool isButtonOrLetter = control.Name.Contains("Word") || control.Name.Contains("Button");
+				bool isWordUpper = control.Name.Contains("Word0");
+				bool isWordLower = control.Name.Contains("Word1");
+				bool isButton = control.Name.Contains("Button");
 				bool isText = control.Name.Contains("Text");
 				bool isFoundBox = control.Name.Contains("Found");
 				if (isDark)
 				{
-					if (isButtonOrLetter || isText || isFoundBox)
+					if (isButton || isText || isFoundBox)
 					{
 						control.BackColor = Color.White;
 						control.ForeColor = Color.Black;
 					}
+					else if (isWordUpper)
+					{
+						control.BackColor = Colors.softPink;
+					}
+					else if (isWordLower)
+					{
+						control.BackColor = Colors.skyBlue;
+					}
 				}
 				else
 				{
-					if (isButtonOrLetter || isText || isFoundBox)
+					if (isButton || isText || isFoundBox)
 					{
 						control.BackColor = Color.Black;
 						control.ForeColor = Color.White;
+					}
+					else if (isWordUpper)
+					{
+						control.BackColor = Colors.neonTeal;
+					}
+					else if (isWordLower)
+					{
+						control.BackColor = Colors.richOrange;
 					}
 				}
 			}
@@ -317,6 +335,7 @@ namespace WordGame
 				DarkModeSwitch.Text = "🌑";
 			}
 			isDark = !isDark;
+			this.ActiveControl = ConfirmButton;
 		}
 	}
 	public class Tools
@@ -604,6 +623,8 @@ namespace WordGame
 		public static Color pitchBlack = Tools.getColor("#000000");
 		public static Color softPink = Tools.getColor("#f49fbc");
 		public static Color skyBlue = Tools.getColor("#92bcea");
+		public static Color neonTeal = Tools.getColor("#23f0c7");
+		public static Color richOrange = Tools.getColor("#FF7733");
 		public static Color darkGrey = Tools.getColor("#aaaaaa");
 	}
 }
