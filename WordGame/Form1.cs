@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Reflection.Emit;
 using System.Drawing.Drawing2D;
 using System.Reflection;
+using System.Xml;
 
 namespace WordGame
 {
@@ -47,10 +48,6 @@ namespace WordGame
 			TextInput.Enabled = false;
 			TextInput.BackColor = Color.White;
 			TextInput.ForeColor = Color.Black;
-			EraseButton.MouseEnter += EraseButton_MouseEnter;
-			EraseButton.MouseLeave += EraseButton_MouseLeave;
-			ConfirmButton.MouseEnter += ConfirmButton_MouseEnter;
-			ConfirmButton.MouseLeave += ConfirmButton_MouseLeave;
 			ConfirmButton.Click += ConfirmButton_Click;
 			ConfirmButton.Select();
 			defaultScrollPosition = ScrollInner.Location;
@@ -205,26 +202,6 @@ namespace WordGame
 			Tools.erase(TextInput);
 			this.ActiveControl = ConfirmButton;
 		}
-		private void EraseButton_MouseEnter(object sender, EventArgs e)
-		{
-			EraseButton.FlatAppearance.BorderColor = Color.Black;
-			EraseButton.FlatAppearance.BorderSize = 1;
-		}
-		private void EraseButton_MouseLeave(object sender, EventArgs e)
-		{
-			EraseButton.FlatAppearance.BorderColor = SystemColors.Control;
-			EraseButton.FlatAppearance.BorderSize = 0;
-		}
-		private void ConfirmButton_MouseEnter(object sender, EventArgs e)
-		{
-			ConfirmButton.FlatAppearance.BorderColor = Color.Black;
-			ConfirmButton.FlatAppearance.BorderSize = 1;
-		}
-		private void ConfirmButton_MouseLeave(object sender, EventArgs e)
-		{
-			ConfirmButton.FlatAppearance.BorderColor = SystemColors.Control;
-			ConfirmButton.FlatAppearance.BorderSize = 0;
-		}
 		private void ScrollWords(object sender, MouseEventArgs e)
 		{
 			if (e.Delta < 0)
@@ -323,6 +300,8 @@ namespace WordGame
 				DarkModeSwitch.BackColor = Color.White;
 				DarkModeSwitch.ForeColor = Colors.dayYellow;
 				DarkModeSwitch.Text = "🔆";
+				ConfirmButton.FlatAppearance.MouseOverBackColor = Tools.getColor("#DDDDDD");
+				EraseButton.FlatAppearance.MouseOverBackColor = Tools.getColor("#DDDDDD");
 			}
 			else
 			{
@@ -330,6 +309,8 @@ namespace WordGame
 				DarkModeSwitch.BackColor = Color.Black;
 				DarkModeSwitch.ForeColor = Colors.nightBlue;
 				DarkModeSwitch.Text = "🌑";
+				ConfirmButton.FlatAppearance.MouseOverBackColor = Tools.getColor("#222222");
+				EraseButton.FlatAppearance.MouseOverBackColor = Tools.getColor("#222222");
 			}
 			isDark = !isDark;
 			this.ActiveControl = ConfirmButton;
@@ -601,14 +582,6 @@ namespace WordGame
 			}
 			inner.Size = newSize;
 			inner.Location = newPosition;
-		}
-		public static Color invertColor(string color)
-		{
-			if (color.Contains("ff"))
-			{
-				color = "#" + color.Remove(0, 2);
-			}
-			return Color.FromArgb(getColor(color).ToArgb() ^ 0xffffff);
 		}
 	}
 	public static class Colors
