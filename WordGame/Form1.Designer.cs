@@ -43,7 +43,7 @@
 			this.TextLeftUntilNext = new System.Windows.Forms.Label();
 			this.TextTitle = new System.Windows.Forms.Label();
 			this.TextScore = new System.Windows.Forms.Label();
-			this.TextMessages = new System.Windows.Forms.Label();
+			this.Messages = new System.Windows.Forms.Label();
 			this.DarkModeSwitch = new System.Windows.Forms.Button();
 			this.Word03 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
@@ -236,14 +236,14 @@
 			this.TextScore.Text = "0";
 			this.TextScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// TextMessages
+			// Messages
 			// 
-			this.TextMessages.Font = new System.Drawing.Font("Roboto", 17F);
-			this.TextMessages.Location = new System.Drawing.Point(1, 56);
-			this.TextMessages.Name = "TextMessages";
-			this.TextMessages.Size = new System.Drawing.Size(235, 28);
-			this.TextMessages.TabIndex = 21;
-			this.TextMessages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.Messages.Font = new System.Drawing.Font("Roboto", 17F);
+			this.Messages.Location = new System.Drawing.Point(1, 56);
+			this.Messages.Name = "Messages";
+			this.Messages.Size = new System.Drawing.Size(235, 28);
+			this.Messages.TabIndex = 21;
+			this.Messages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// DarkModeSwitch
 			// 
@@ -281,7 +281,7 @@
 			this.ClientSize = new System.Drawing.Size(505, 393);
 			this.Controls.Add(this.Word03);
 			this.Controls.Add(this.DarkModeSwitch);
-			this.Controls.Add(this.TextMessages);
+			this.Controls.Add(this.Messages);
 			this.Controls.Add(this.TextScore);
 			this.Controls.Add(this.TextTitle);
 			this.Controls.Add(this.TextLeftUntilNext);
@@ -322,7 +322,7 @@
 		private System.Windows.Forms.Label TextLeftUntilNext;
 		private System.Windows.Forms.Label TextTitle;
 		private System.Windows.Forms.Label TextScore;
-		private System.Windows.Forms.Label TextMessages;
+		private System.Windows.Forms.Label Messages;
 		private System.Windows.Forms.Button DarkModeSwitch;
 		private System.Windows.Forms.Button Word03;
 	}

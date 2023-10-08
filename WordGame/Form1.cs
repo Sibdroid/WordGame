@@ -64,22 +64,22 @@ namespace WordGame
 			string word2 = startWords.Item2;
 			if (word.Length < 4)
 			{
-				TextMessages.Text = "TOO SHORT";
-				TextMessages.ForeColor = Colors.warningYellow;
+				Messages.Text = "TOO SHORT";
+				Messages.ForeColor = Colors.warningYellow;
 				Tools.wipe(TextInput);
 				return;
 			}
 			if (foundWords.Contains(word))
 			{
-				TextMessages.Text = "ALREADY FOUND";
-				TextMessages.ForeColor = Colors.warningYellow;
+				Messages.Text = "ALREADY FOUND";
+				Messages.ForeColor = Colors.warningYellow;
 				Tools.wipe(TextInput);
 				return;
 			}
 			if (!allWords.Contains(word))
 			{
-				TextMessages.Text = "NO SUCH WORD";
-				TextMessages.ForeColor = Colors.warningYellow;
+				Messages.Text = "NO SUCH WORD";
+				Messages.ForeColor = Colors.warningYellow;
 				Tools.wipe(TextInput);
 				return;
 			}
@@ -87,15 +87,15 @@ namespace WordGame
 			bool anyWord2 = (word2.Any(x => word.Any(y => y == x)));
 			if (!anyWord1)
 			{
-				TextMessages.Text = "ADD A PINK ONE";
-				TextMessages.ForeColor = Colors.warningYellow;
+				Messages.Text = "ADD A PINK ONE";
+				Messages.ForeColor = Colors.warningYellow;
 				Tools.wipe(TextInput);
 				return;
 			}
 			if (!anyWord2)
 			{
-				TextMessages.Text = "ADD A BLUE ONE";
-				TextMessages.ForeColor = Colors.warningYellow;
+				Messages.Text = "ADD A BLUE ONE";
+				Messages.ForeColor = Colors.warningYellow;
 				Tools.wipe(TextInput);
 				return;
 			}
@@ -129,8 +129,8 @@ namespace WordGame
 			Tools.wipe(TextInput);
 			Tools.adjustScrollBar(ScrollOuter, ScrollInner, defaultScrollSize,
 				                  defaultScrollPosition, foundWordsDown, foundWordsUp, foundWords);
-			TextMessages.Text = $"{word.ToUpper()}";
-			TextMessages.ForeColor = Colors.correctGreen;
+			Messages.Text = $"{word.ToUpper()}";
+			Messages.ForeColor = Colors.correctGreen;
 			TextScore.Text = $"{int.Parse(TextScore.Text) + Tools.calculateValue(word)}";
 			var thresholds = new[] { 0, 1, 5, 10, 20, 40, 80 };
 			var titles = new[] { "Basic", "Novice", "Learner", "Scholar", "Adept", "Expert", "Genius" };
@@ -265,7 +265,7 @@ namespace WordGame
 				{
 					if (isButton || isText || isFoundBox)
 					{
-						control.BackColor = Color.White;
+						control.BackColor = Colors.veryLightGrey;
 						control.ForeColor = Color.Black;
 					}
 					else if (isWordUpper)
@@ -281,7 +281,7 @@ namespace WordGame
 				{
 					if (isButton || isText || isFoundBox)
 					{
-						control.BackColor = Color.Black;
+						control.BackColor = Colors.veryDarkGrey;
 						control.ForeColor = Color.White;
 					}
 					else if (isWordUpper)
@@ -296,24 +296,25 @@ namespace WordGame
 			}
 			if (isDark)
 			{
-				this.BackColor = Color.White;
-				DarkModeSwitch.BackColor = Color.White;
+				this.BackColor = Colors.veryLightGrey;
+				DarkModeSwitch.BackColor = Colors.veryLightGrey;
 				DarkModeSwitch.ForeColor = Colors.dayYellow;
 				DarkModeSwitch.Text = "🔆";
-				ConfirmButton.FlatAppearance.MouseOverBackColor = Tools.getColor("#DDDDDD");
-				EraseButton.FlatAppearance.MouseOverBackColor = Tools.getColor("#DDDDDD");
+				ConfirmButton.FlatAppearance.MouseOverBackColor = Colors.lightGrey;
+				EraseButton.FlatAppearance.MouseOverBackColor = Colors.lightGrey;
 			}
 			else
 			{
-				this.BackColor = Color.Black;
-				DarkModeSwitch.BackColor = Color.Black;
+				this.BackColor = Colors.veryDarkGrey;
+				DarkModeSwitch.BackColor = Colors.veryDarkGrey;
 				DarkModeSwitch.ForeColor = Colors.nightBlue;
 				DarkModeSwitch.Text = "🌑";
-				ConfirmButton.FlatAppearance.MouseOverBackColor = Tools.getColor("#222222");
-				EraseButton.FlatAppearance.MouseOverBackColor = Tools.getColor("#222222");
+				ConfirmButton.FlatAppearance.MouseOverBackColor = Colors.darkGrey;
+				EraseButton.FlatAppearance.MouseOverBackColor = Colors.darkGrey;
 			}
 			isDark = !isDark;
 			this.ActiveControl = ConfirmButton;
+			Console.WriteLine(this.BackColor);
 		}
 	}
 	public class Tools
@@ -595,6 +596,9 @@ namespace WordGame
 		public static Color skyBlue = Tools.getColor("#92bcea");
 		public static Color neonTeal = Tools.getColor("#23f0c7");
 		public static Color richOrange = Tools.getColor("#FF7733");
-		public static Color darkGrey = Tools.getColor("#aaaaaa");
+		public static Color veryLightGrey = Tools.getColor("#FFFFFF");
+		public static Color lightGrey = Tools.getColor("#DDDDDD");
+		public static Color veryDarkGrey = Tools.getColor("#222222");
+		public static Color darkGrey = Tools.getColor("#444444");
 	}
 }
