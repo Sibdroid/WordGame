@@ -197,11 +197,13 @@ namespace WordGame
 			Button button = (Button)sender;
 			string letter = button.Text;
 			Tools.addLetter(TextInput, letter);
+			this.ActiveControl = ConfirmButton;
 		}
 
 		private void EraseButton_Click(object sender, EventArgs e)
 		{
 			Tools.erase(TextInput);
+			this.ActiveControl = ConfirmButton;
 		}
 		private void EraseButton_MouseEnter(object sender, EventArgs e)
 		{
@@ -273,11 +275,6 @@ namespace WordGame
 				}
 			}
 		}
-		private void ConfirmButton_Click_1(object sender, EventArgs e)
-		{
-
-		}
-
 		private void DarkModeToggle_Click(object sender, EventArgs e)
 		{
 			foreach (Control control in this.Controls)

@@ -179,7 +179,6 @@
 			this.ConfirmButton.TabStop = false;
 			this.ConfirmButton.Text = "✓";
 			this.ConfirmButton.UseVisualStyleBackColor = false;
-			this.ConfirmButton.Click += new System.EventHandler(this.ConfirmButton_Click_1);
 			// 
 			// ScrollOuter
 			// 
